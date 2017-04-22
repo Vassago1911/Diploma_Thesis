@@ -1,0 +1,366 @@
+\documentclass[11pt,twoside,a4paper]{scrbook} %11pt+=oneside
+\usepackage{a4}
+%\usepackage{geometry}
+%\geometry{left=25mm, right=40mm, top=25mm, bottom=25mm, footskip=5mm}%, pdftex}
+\usepackage{lscape}
+\linespread{1.2}
+
+\usepackage{xypic}
+\usepackage{times}
+%\usepackage{yfonts}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{amsmath,tkz-linknodes}
+\usepackage{tikz}
+\usepackage{ulem}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{ex}[thm]{Example}
+\newtheorem{remi}[thm]{Reminder}
+
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\colim}{colim}
+
+\title{Sammlung 2011}
+
+\begin{document}
+\section{Homeomorphisms for future reference/convenience}
+Betrachte die Abbildung:
+$$f_{a,b}(x):=\begin{cases}\frac{\|x\|_a}{\|x\|_b}x &~~~x\neq 0 \\ 0 & x=0\end{cases}$$
+das ist punktiert, stetig, weil was von Ordnung $\|x\|^2$ oben steht, und nur $\|x\|^1$ unten, und invertierbar, n\"amlich mit $f_{b,a}$ als inverser
+Abbildung.\\
+Sehr vergleichbar kriegen wir einen Hom\"oo $\Delta^{n+1}$ nach $I^{n+1}$, der die R\"ander respektiert, durch:
+$$h_n(t=(t_0,t_1,\ldots,t_n)):=\frac{\sum\limits_{i=0}^{n-1}t_i}{\max_{i\in\{0,\ldots,n-1\}}(t_i)}$$
+(genau genommen ist das der Vergleich Supremums- und Eins-Norm, und $\Delta^n$ runterprojizieren durch weglassen der letzten Koordinate.)
+\section{Retractions for future reference}
+Die Retraktion $r\colon \mathbb{D}^n\setminus\{0\} \rightarrow \mathbb{S}^{n-1}$  gegeben durch $r(x) := \frac{x}{\|x\|}$ l\"asst sich auf $\Delta^n$ wie folgt umbauen.
+Setze $bary_n:=\left(\frac{1}{n+1}\right)_{i=0}^n$ und betrachte die folgende Retraktion:
+$$\Delta^n\setminus\{bary_n\}\rightarrow \partial\Delta^n$$ mit:
+$$r(t):= \frac{t-\min_{i\in\{0,\ldots,n\}}(t_i)\cdot(1,\ldots,1)}
+              {1-(n+1)\min_{i\in\{0,\ldots,n\}}(t_i)}$$
+Wesentlicher Plan: \\Z\"ahler: Kill die kleinste Koordinate, dann verr\"at dir die neue null, auf welchen Randpunkt du geh\"orst, (wenn's mehrere sind, wird's halt sogar ne Ecke), \\
+Nenner: aber damit wir in $\Delta^n$ bleiben normieren wir wieder auf $1$. Wesentliche Idee: $t\in \partial \Delta^n \Leftrightarrow \min(t) = 0$.
+\section{tune(retraction) = NDR}
+Es sieht jetzt f\"urchterlich so aus, als ob sich diese Unstetigkeitsstelle in der Mitte weder im Scheiben- noch im Simplexfall wegmassieren l\"asst. Luckily, wenn wir einfach drauflos-beschlie\ss en,
+in der Mitte solle bitte alles auf den Mittelpunkt gezogen werden und au\ss en werde bitte heftig retrahiert, dann m\"ussen wir in der Mitte nur interpolieren. Und als Topologe darf ich das ja stetig machen
+:D \\
+Erstmal im $\mathbb{D}^n$-Fall, denn der ist etwas sauberer hinzuschreiben, wir brauchen eine Verschmierfunktion:
+$$\begin{aligned}
+\chi\colon &I \longrightarrow I\\
+&t\mapsto{\begin{cases}0 & ~~t\in\lbrack0,\frac13\rbrack\\ 3t-1 & ~~t\in\lbrack\frac13,\frac23\rbrack\\ 1 &~~ t\in\lbrack\frac23,1\rbrack\end{cases}}
+\end{aligned}$$
+und daraus k\"onnen wir jetzt f\"ur jedes $\mathbb{D}^n$ eine Homotopie basteln, die uns $(\mathbb{D}^n,\mathbb{S}^{n-1})$ als NDR-Paar vorf\"uhrt:
+$$\begin{aligned}
+H\colon &\mathbb{D}^n\times I \longrightarrow \mathbb{D}^n\\
+&(x,t)\mapsto {\begin{cases}(1-t)x+t\chi(\|x\|)\frac{x}{\|x\|} & x\neq 0 \\ 0 & x=0\end{cases}}
+\end{aligned}$$
+Das ist jetzt stetig in Null, weil es in einer Umgebung sogar konstant ist. Au\ss erdem gelten mit 
+$$\begin{aligned}u\colon &\mathbb{D}^n \rightarrow I\\ &x \mapsto \frac32\cdot\min(1-\|x\|,\frac23)\end{aligned}$$
+dann die Bedingungen f\"ur ein NDR-Paar.\\
+Dasselbe geht f\"ur $\Delta^n$, es ist nur ein bisschen unaufger\"aumt :)\\
+W\"ahlen wir etwa $u$ und $\chi$ wie folgt:\\
+$$\chi(s):=\begin{cases}0 & s\in \lbrack 0,\frac1{n+1}\rbrack\\ \frac13((n+1)s-1)&s\in\lbrack\frac1{n+1},\frac2{n+1}\rbrack\\1&s\in\lbrack\frac2{n+1},1\rbrack\end{cases}$$
+und
+$$u(t):=\min(\min(t_i)\cdot\frac{(n+1)^2}{n-1},1).$$
+In Schulspeak gilt in $\mathbb{D}^n$, dass der Ortsvektor $x$ und der "Abstand" vom Mittelpunkt identisch sind, denn der Mittelpunkt ist Null. Hier lagern wir diese Differenz aus in einen Differenzenvektor:\\
+$$\delta_t:=\frac{t-\min(t_i)(1,\ldots,1)}{1-(n+1)\min(t_i)} - t.$$
+Das ist in $t = bary_n$ nicht definiert, denn der Mittelpunkt kann sich halt f\"ur keinen Randpunkt entscheiden, macht aber nix :) Die Homotopie setzen wir jetzt wie folgt an:
+$$
+H(t,s):=\begin{cases}{\begin{aligned}(1-s)t& \\
+                         + s(t &+ \chi\left(1-(n+1)\min(t_i)\right)\delta_t \\
+                               &+ \left(1-\chi(1-(n+1)\min(t_i))\right)(bary_n-t)) \end{aligned}}& t\neq bary_n
+                     \\bary_n&t=bary_n.\end{cases}
+$$
+Das hei\ss t wir sehen, dass in Abh\"angigkeit vom $\chi$-Wert eines Punktes $t$ entweder die Mitte oder der zugeh\"orige Randpunkt mehr dran zerren.\\
+Weil auch dies hier wieder nur das Ausschreiben der essentiellen Idee $t\in\partial \Delta^n \Leftrightarrow \min(t_i)=0$ ist, l\"asst sich dies insbesondere auf die "Skelett"-Filtrierung der
+topologischen Bar-Konstruktion anwenden f\"ur $(B_n(G),B_{n-1}(G))$ und bleibt alles sch\"on wohldefiniert, weil Punkte im Inneren von Zellen in $B_n(G)$, die nicht in $B_{n-1}(G)$ sind, wohldefinierte
+$t$-Koordinaten (ungleich null) haben. Und es macht \"uberhaupt keinen Unterschied, ob das alles in der dicken oder der weniger dicken Realisierung passiert.\\
+Btw. das $min(t_i)$ war einfach nur bequem, weil da extrem einfach zu rechnen ist, dass das Maximum an $bary_n$ liegt, das Produkt \"uber alle $t_i$ w\"urde wohl dasselbe tun, und sieht vielleicht in 
+ner anderen Welt netter aus.
+\section{NDR-Paare und die dazugeh\"orige Retraktion $X\times I\rightarrow X\times 0 \cup A\times I $}
+Vereinfachter May:\\
+$(X,A)$ NDR $\Rightarrow (X\times I, X\times 0 \cup A\times I)$ ist DR.\\
+Bew: $(I,0)$ ist DR Paar mit zB $v\colon I\rightarrow I$ mit $v(t):=\frac12t$ und $j\colon Y\times I = I\times I \rightarrow Y$ ist gegeben als $j(t,s):=(1-s)t$ und so wird
+$(X\times I, X\times 0 \cup A\times I)$ zum DR-Paar mit $w\colon X\times I \rightarrow I$ als $w(x,y):=\min(u(x),\frac12y)$ und 
+$$\begin{aligned}
+H\colon &X\times I\times I\rightarrow X\times I\times I\\
+&(x,y,t) \mapsto {\begin{cases}(h(x,t), y-2tu(x)) & \frac12y\geq u(x)\\ (h(x,\frac{ty}{2u(x)}), (1-t)y) &u(x)\geq \frac12y\end{cases}}\end{aligned}$$
+Und insbesondere erhalten wir eine Retraktion wie oben genannt durch:\\
+$$r(x,s) := \begin{cases}(h(x,1), s-2u(x)) & \frac12s\geq u(x) \\ (h(x,\frac{s}{2u(x)}),0) & u(x)\geq \frac12s\end{cases}$$
+\section{$(B_nG,B_{n-1}G)$ ist NDR}
+Drillen wir zu dem Zweck noch mal an der obigen Homotopie rum, damit sie etwas lesbarer wird. Setze $$u(t) := \min(\min(t_i)\cdot2n,1)$$ und 
+$$\chi(s):=\begin{cases}0 & s\in\lbrack0,\frac14\rbrack\\4s-1&s\in\lbrack \frac14,\frac12\rbrack\\1&s\in\lbrack\frac12,1\rbrack. \end{cases}$$
+Dann tut $$H(t,s):=(1-s)t + s(t+\chi(1-(n+1)\min(t_i))\delta_t+(1-\chi(1-(n+1)\min(t_i))(bary_n-t)))$$
+immer noch, was es soll. (Vorsicht $t=bary_n$ unterdrückt - immer noch stetig, aber halt nicht an sich dort definiert :) ) Damit kriegen wir die folgende Retraktion:
+$$r(t,s):=\begin{cases}(H(t,1),s-2u(t)) & s\geq2u(t)\\(H(t,\frac{s}{2u(t)}),0)&2u(t)\geq s\end{cases}$$
+und das auseinandergedr\"oselt sieht zwar aus wie eine Explosionszeichnung, funktioniert aber f\"ur jedes $(B_nG,B_{n-1}G)$, ist also gut investiert :) :
+\begin{landscape}
+$$r(t,s):=\begin{cases}
+                       \left.\begin{cases}(t+\frac{s}{4n\min(t_i)}\delta_t,0)&\frac{s}{4n\min(t_i)}\leq1\\
+                                    (t+\delta_t,s-4n\min(t_i))&s-4n\min(t_i)\geq 0\end{cases}\right\}
+                           &\min(t_i)\leq\frac12\frac1{n+1}\\
+		       \left.\begin{cases}(t+\frac{s}{4n\min(t_i)}\delta_t+\frac{s}{2n\min(t_i)}(1-2(n+1)\min(t_i))(t+\delta_t-bary_n),0)&\frac{s}{4n\min(t_i)}\leq1\\
+                                    (t+\delta_t+2(1-2(n+1)\min(t_i))(t+\delta_t-bary_n),s-4n\min(t_i))&s-4n\min(t_i)\geq0\end{cases}\right\}
+                           &\frac12\frac1{n+1} \leq\min(t_i)\leq\frac12\frac1{n}\\
+                             (t+\frac{s}2\delta_t+s(1-2(n+1)\min(t_i))(t+\delta_t-bary_n),0)
+                           &\frac12\frac1{n}\leq \min(t_i)\leq\frac34\frac1{n+1}\\
+			     (t+\frac{s}2(bary_n-t),0)
+                           &\frac34\frac1{n+1}\leq\min(t_i)\\
+\textcolor{gray}{ \left.\begin{cases}(t+\frac{s}{8\min(t_i)}(bary_2-t),0)&\frac{s}{8\min(t_i)}\leq1\\
+                                    (bary_2,s-8\min(t_i))&s-8min(t_i)\geq0\end{cases}\right\}}
+       &\textcolor{gray}{
+                        n=2\wedge \min(t_i)=\frac14=\frac1{2n}
+                             }\\
+           \end{cases}$$
+\end{landscape}
+\newpage
+\begin{landscape}
+Uns geht's aber ganz hervorragend, wenn wir uns entspannungshalber nur den Fall $n=2$ ansehen:
+$$\begin{aligned}r(t,s)&
+:={\begin{cases}
+                       \left.\begin{cases}(t+\frac{s}{8\min(t_i)}\delta_t,0)&s\leq8\min(t_i)\\
+                                          (t+\delta_t,s-8\min(t_i))         &s\geq8\min(t_i)\end{cases}\right\}
+                           &\min(t_i)\leq\frac16\\
+		       \left.\begin{cases}(t+\frac{s}{8\min(t_i)}\delta_t+\frac{s}{4\min(t_i)}(1-6\min(t_i))(t+\delta_t-bary_2),0)&s\leq8\min(t_i)\\
+                                          (t+\delta_t+2(1-6\min(t_i))(t+\delta_t-bary_2),s-8\min(t_i))                            &\xout{s\geq8\min(t_i)\geq\frac43}\end{cases}\right\}
+                           &\frac16 \leq\min(t_i)\leq\frac14\\
+                             (t+\frac{s}2\delta_t+s(1-6\min(t_i))(t+\delta_t-bary_2),0)
+                           &\frac14\leq \min(t_i)\leq\frac14\\
+			     (t+\frac{s}2(bary_2-t),0)
+                           &\frac14\leq\min(t_i)\\
+		       \left.\begin{cases}(t+\frac{s}{8\min(t_i)}(bary_2-t),0)&s\leq8\min(t_i)\\
+                                          (bary_2,s-8\min(t_i))               &\xout{s\geq2}\end{cases}\right\}
+			   &n=2\wedge \min(t_i)=\frac14=\frac1{2n}\\
+           \end{cases}}\\
+&={\begin{cases}
+                       \left.\begin{cases}(t+\frac{s}{8\min(t_i)}\delta_t,0) &s\leq8\min(t_i)\\
+                                          (t+\delta_t,s-8\min(t_i))          &s\geq8\min(t_i)\\\end{cases}\right\}
+                           &\min(t_i)\leq\frac16\\
+                      (t+\frac{s}{8\min(t_i)}\delta_t+\frac{s}{4\min(t_i)}(1-6\min(t_i))(t+\delta_t-bary_2),0)
+                           &\frac16 \leq\min(t_i)\leq\frac14\\
+			     (t+\frac{s}2(bary_2-t),0)
+                           &\frac14\leq\min(t_i)\\
+           \end{cases}}
+\end{aligned}$$
+Immer noch nichts, was man ohne monatelanges Kristallkugeln raten k\"onnte, aber schon viel h\"ubscher :)\\
+(Ref f\"ur $(G,e)$ well-pointed $\Rightarrow$ alles Kofaserung, was mensch braucht: Boardman-Vogt Lemma 6.8.(b))
+\end{landscape}
+\section{Homotopieinverse zu $B_2G\cup CB_1G\rightarrow B_2G/B_1G$}
+Der Quotient rechts hat ne wunderh\"ubsche Identifizierung (und zwar hom\"oomorph!!) zu $\Sigma^2G^{\wedge2}$, aber in Kofasersequenzen steht ehrlicherweise
+halt erstmal der linke Ausdruck, also hei\ss t einen Verbindungshomomorphismus brauchen, diese Abbildung suchen (siehe May):
+$$\xymatrix{
+B_2G \ar[d]^p \ar[r] &B_2G\times\{1\} \ar[r] &B_2G\times I \ar[r]^/-4ex/r & B_2G\times\{0\}\cup B_1G\times I \ar[d] \\
+B_2G/B_1G\ar[rrr]^{\phi} &&& B_2G\cup CB_1G\\
+}$$
+Und etappenweise ist das nicht mehr sooo dramatisch:
+
+$$\begin{aligned}
+\mathrm{erstmal~~~} B_2G\rightarrow B_2G\times\{0\}\cup B_1G\times I\\
+\lbrack(g_1,g_2),(t_0,t_1,t_2)\rbrack \mapsto (\lbrack (g_1,g_2),(t_0,t_1,t_2)\rbrack,1)\\
+\mapsto {\begin{cases}
+	  (\lbrack(g_1,g_2),t+\delta_t\rbrack,1-8\min(t_i))          & \min(t_i)\leq\frac18\\
+          (\lbrack(g_1,g_2),t+\frac{1}{8\min(t_i)}\delta_t\rbrack,0) & \frac18\leq\min(t_i)\leq\frac16\\
+          (***,0)					             & \frac16\leq\min(t_i)\leq\frac14\\
+          (\frac12bary_2+\frac12 t,0)				     & \frac14\leq\min(t_i)
+         \end{cases}}
+\end{aligned}$$
+Das "$***$" s\"ahe tats\"achlich gruselig aus, aber ein Gl\"uck ist die letzte Komponente ja null!! :D
+$$\begin{aligned}
+\mathrm{nachschalten~~ von~~~} B_2G\cup CB_1G\rightarrow \Sigma B_1G\\
+\mapsto  {\begin{cases}
+	  (\lbrack(g_1,g_2),t+\delta_t\rbrack,1-8\min(t_i))          & \min(t_i)\leq\frac18\\
+          * & \frac18\leq\min(t_i)\leq\frac16\\
+          * & \frac16\leq\min(t_i)\leq\frac14\\
+          * & \frac14\leq\min(t_i)
+         \end{cases}}\\
+\simeq {\begin{cases}
+          * & \min(t_i)\in\lbrack\frac13-\epsilon,\frac13\rbrack\\
+          \lbrack\lbrack(g_1,g_2),t+\delta(t)\rbrack,1-c\min(t_i)\rbrack & \min(t_i)\in\lbrack0,\frac13-\epsilon\rbrack
+       \end{cases}}
+\end{aligned}$$
+mit abgestimmtem $c$ und $\epsilon$ und das ist eine ziemlich liebensw\"urdige Abbildung geworden :D
+und das geht sogar noch h\"ubscher ohne Fallunterscheidung:
+$$d[(g_1,g_2),(t_0,t_1,t_2)]:=[[(g_1,g_2),t+\delta_t],1-3\min(t_i)].$$
+\section{$B(G_1\ast_{G_0} G_2)\simeq BG_1\coprod_{BG_0}BG_2$}
+Es ist klar, dass sich $BG$'s mit Produkten vertragen, weil es geometrische Realisierungen tun, insbesondere haben wir in dem Fall einen
+Hom\"oomorphismus. Aber bis auf Homotopie gilt das auch f\"ur Pushouts: Sei $G:=G_1\ast_{G_0}G_2$, Beh: $BG \simeq BG_1\coprod_{BG_0}BG_2$. Wir rechnen
+die universelle Eigenschaft nach, dass Homotopieklassen von Abbildungen aus $BG$ heraus durch die Fundamentalgruppe festgelegt sind: $$[BG_i,Z]\cong \Hom(G_i,\pi_1Z).$$
+$$[BG,Z]\cong \Hom(G,\pi_1Z) = \Hom(G_1\ast_{G_0}G_2,\pi_1Z)$$
+via universeller Eigenschaft aber gilt die Isomorphie zu:
+$$\cong \{(f_1,f_2)\in \Hom(G_1,\pi_1Z)\times\Hom(G_2,\pi_1Z) | f_1g_1=f_2g_2\}$$
+f\"ur $g_i\colon G_0 \rightarrow G_i$ die jeweilige Inklusion.
+$$\cong \{(\varphi_1,\varphi_2)\in [BG_1,Z]\times[BG_2,Z]|\pi_1(\varphi_1)g_1=\pi_1(\varphi_2)g_2\}$$
+aber die Bedingung, zu kommutieren ist wieder \"aquivalent zum Raumlevel:
+$$= \{(\varphi_1,\varphi_2)\in [BG_1,Z]\times[BG_2,Z]|\varphi_1B(g_1)=\varphi_2B(g_2)\}$$
+$$\cong [BG_1\coprod_{BG_0}BG_2,Z].$$
+Daraus folgt die Behauptung.
+\section{$EG\simeq *$}
+Gut, das wei\ss ~ ich jetzt schon ne Weile, aber das Modell unendlicher Join l\"asst es mich sogar mehr oder weniger h\"ubsch, auf jeden Fall aber explizit hinschreiben:
+Setze also $EG:=\colim_n G^{\ast n}$ mit den Inklusionen $G^{\ast n}\rightarrow G^{\ast (n+1)}; ~~ (g_1,t_1,g_2,\ldots,t_n) \mapsto (g_1,t_1,g_2,\ldots,t_n,e,0)$.
+Mengenm\"a\ss ig also ist $EG$ zusammengebaut aus "unendlichen" Tupeln $(g_0,t_0,g_1,t_1,\ldots)$ mit $\sum t_i=1$, alle $t_i\geq 0$, fast alle $t_i=0$ modulo der 
+Relationen, wo ne $t_i=0$ steht, ist das $g_i$ wurscht.\\
+Wie's die simplizialen Expert\_innen aber so m\"ogen, lassen sich die Tupel auch schreiben als $(g_0,s_0,g_1,s_1,\ldots)$ mit monoton steigenden $s_i$, wo das
+$g_i$ egal ist, wenn sich das $s_i$ nicht vom Vorg\"anger unterscheidet und ab einem endlichen Schritt nur noch $s_i = 1$ da steht.
+In diesem Modell l\"asst sich hochshiften hinschreiben als $(g_1,s_1,g_2,s_2,\ldots) \mapsto (e,0,g_1,s_1,\ldots)$, der Shift l\"asst sich zur Identit\"at homotopieren mit:
+$$
+\begin{aligned}
+H^1\colon& EG\times I\rightarrow EG\\
+&(({\bold g,\bold t}),s)\mapsto (\ldots, g_n,\alpha_{n-1}(s),g_n,1-\alpha_{n-1}(s),\ldots) \\ \mathrm{mit Homeo} \alpha_n\colon [\frac{1}{2^{n+1}},\frac{1}{2^n}] \rightarrow I
+\end{aligned}$$
+modulo ein bisschen Index-Reparieren steht da jetzt jedenfalls eine Homotopie vom Shift zur Identit\"at.
+und in der jetzt freien ersten Koordinate k\"onnen wir einfach die $t$'s aufsammeln. Das geht besser im Schrieb mit monoton steigenden $s_i$.
+$$
+\begin{aligned}
+H^2\colon& EG\times I\rightarrow EG\\
+&(({\bold g,\bold t}),s)\mapsto (e,s,g_1,max(s,t_1),g_2,max(s,t_2),\ldots),
+\end{aligned}$$
+und wenn $s$ bei eins angekommen ist, ist das offensichtlich der trivialst-m\"ogliche Punkt in $EG$. :)
+\section{Zum stable Splitting $\Sigma X\times Y \simeq \Sigma X \vee \Sigma Y \vee \Sigma(X\wedge Y)$}
+(vgl Hatcher) Keine Ahnung mehr, wo das stand, aber der Join jedenfalls sei $X\ast Y := X\times I \times Y / \thicksim$ mit
+den Relationen $(x,0,y)\thicksim(x',0,y),(x,1,y)\thicksim(x,1,y'),(*,t,*)\thicksim(*,0,*)$, was der Intuition entspricht, Verbindungsgeraden zwischen
+Punkten in $X$ und $Y$ zu ziehen, also: $(x,t,y)\approx tx + (1-t)y$, (sogar der Basispunkt f\"ugt sich dieser Intuition, wenn man sich
+einfach beide Basispunkte gleich denkt).\\
+Der Join ist unser wesentlicher Helferling f\"ur die o.g. Aussage, betrachte den Pushout:
+$$\xymatrix{
+X\vee Y\ar[r]\ar[d] & X\ast Y \ar[d]\\
+CX\vee CY \ar[r]&CX\cup( X\ast Y) \cup CY.
+}$$
+Insbesondere gibt die untere Waagerechte (unter netten Voraussetzungen) eine Kofaserung aus einem zusammenziehbaren
+Raum, d.h. wie immer k\"onnen wir den rausteilen: $X\ast Y\simeq (CX\cup( X\ast Y) \cup CY)/(CX\vee CY) \cong (X\ast Y)/(X\vee Y),$
+wobei der letzte Hom\"oomorphismus dem Wegwerfen \"uberfl\"ussiger Repr\"asentanten entspricht. Beh: Es gilt $$\frac{X\ast Y}{X\vee Y}\cong \Sigma(X\times Y).$$
+Die Zuordnungen sind relativ klar:
+$$\begin{aligned}
+\phi\colon & \frac{X\ast Y}{X\vee Y} \rightarrow \Sigma(X\times Y)\\
+&[tx+(1-t)y]\mapsto [t,(x,y)]\\
+\psi\colon & \Sigma(X\times Y) \rightarrow\frac{X\ast Y}{X\vee Y}\\
+&[t,(x,y)]\mapsto [tx+(1-t)y].
+\end{aligned}$$
+Hier h\"upft auch fr\"ohlich der Grund f\"ur die etwas wunderliche Relation $(*,t,*)\thicksim(*,0,*)$ im Join rum, statt direkt alles, wo ein Basispunkt steht, wegzureduzieren - denn im Produkt
+ist der Basispunkt nunmal $(*,*)$, mehr werden wir auf einmal erstmal nicht los :)\\
+Wir haben noch eine weitere Kofaserung $j\colon CX\vee CY \rightarrow CX\cup(X\ast Y)\cup CY$ gegeben durch
+$j[x,t]:=(1-t)x+t* ~~ j[y,t]:=t* + (1-t)y.$
+Diese Einbettung trifft die "\"au\ss eren" Kegel nur in ihren B\"oden, d.h. es gilt:
+$$\frac{CX\cup(X\ast Y)\cup CY}{j(CX\vee CY)}\cong \Sigma X \vee \frac{X\ast Y}{j(CX\vee CY)}\vee \Sigma Y$$
+Um den mittleren Ausdruck bei klarem Verstand bearbeiten zu k\"onnen, schreibe ich ihn nochmal aus:
+$$\frac{X\ast Y}{j(CX\vee CY)} = X\times Y \times \Delta^1 / \thicksim =: Z$$
+mit den Relationen:
+\begin{enumerate}
+\item $(x,y,0,1)\thicksim (x',y,0,1)$
+\item $(x,y,1,0)\thicksim (x,y',1,0)$
+\item $(*,*,t,1-t)\thicksim (*,*,s,1-s)$
+\item $(x,*,t,1-t)\thicksim (x,*,0,1)$
+\item $(*,y,t,1-t)\thicksim (*,y,1,0).$
+\end{enumerate}
+Und jetzt bestehen Chancen drauf, dass ich auch Jahre sp\"ater noch die Hom\"oomorphismen
+$$\begin{aligned}
+\phi\colon & Z \rightarrow \Sigma(X\wedge Y)\\
+&[x,y,t,1-t]\mapsto [t,[x,y]]\\
+\psi\colon & \Sigma(X\wedge Y) \rightarrow Z\\
+&[t,[x,y]]\mapsto [x,y,t,1-t],
+\end{aligned}$$
+verstehen kann, und harmlos finde :)
+\subsection{Was hei\ss t $\Sigma^2\mu\colon \Sigma(G\wedge G) \rightarrow \Sigma G$?}
+Wenn wir eine abelsche Gruppe haben mit einer Multiplikation $\mu\colon G\times G\rightarrow G$, und h\"angen einmal ein:
+$$\Sigma(G\wedge G)\vee \Sigma G\vee \Sigma G \simeq \Sigma(G\times G) \rightarrow \Sigma G$$
+und k\"onnen auch ein zweites Mal einh\"angen:
+$$\Sigma^2(G\wedge G)\vee \Sigma^2 G\vee \Sigma^2 G \simeq \Sigma^2(G\times G) \rightarrow \Sigma^2 G$$
+beachte dabei, dass dieses $\Sigma^2 \mu$ noch netteste Form hat: $[(g,h),(t,s)]\mapsto [gh,(t,s)]$.\\
+Das hei\ss t, was ich brauche, ist eine Abbildung: $\Sigma^2(G\wedge G) \rightarrow \Sigma^2(G\times G)$ und das sollte \"uber's stable
+splitting schlie\ss lich gehen:
+$$\xymatrix{
+\Sigma^2(G\wedge G) \ar[r]\ar[dr] & \Sigma^2(G\times G)\\
+                                  & \Sigma^2(G\wedge G)\vee \Sigma^2 G \vee \Sigma^2 G \ar[u]\\
+}$$
+Das hei\ss t brauchen tue ich eine Homotopieinverse: $q\colon \Sigma(G\wedge G)\vee \Sigma G\vee \Sigma G \rightarrow \Sigma(G\times G),$
+das wiederum hei\ss t \"uber den vorgenannten Beweisweg:
+$$\Sigma(G\wedge G)\vee \Sigma G \vee \Sigma G \rightarrow CG\cup G\ast G\cup CG \rightarrow \Sigma(G\times G),~~~~~~(*)$$
+(erst \"Aquivalenz, dann Projektion)\\
+wobei die letzte Abbildung haaaarmlos ist :), das eigentlich Problem ist also wieder Kegel rausteilen umzukehren.
+Die zugeh\"orige Kofaserung ist $$C(G\vee G) \rightarrow G\ast G \rightarrow G\ast G \cup C^2(G\vee G).$$
+(und nun?)\\
+(Und weil die $\Sigma G$ eh nur rumnerven finden wir immerhin, dass wir auch mit
+$$\Sigma(G\wedge G)\rightarrow G\ast G\rightarrow \Sigma (G\times G)~~~~~~(*)$$
+(erst \"Aquivalenz, dann Projektion)
+klarkommen, mit derselben Kofaserung wie oben.)
+Note: Antoine Touze (mit Accent); Hopf Construction
+\section{Homologie- und Homotopiegruppen simplizialer Abelscher Gruppen ($R$-Moduln?)}
+Sei $A_\bullet \in sAb$, betrachte den Funktor (sonst namenlos):
+$$\begin{aligned}K\colon &sAb \longrightarrow Ch_+(\mathbb{Z})\\
+                         &(K(A_\bullet))_n = A_n\\
+                         & d_{K(A),n}:=\sum_{i=0}^n(-1)^id_i\end{aligned}$$
+und zweitens den Funktor:
+$$\begin{aligned}\overline{(\cdot)}\colon& sAb \rightarrow Ch_+(\mathbb{Z})\\
+                                         & (\overline{(A_\bullet)})_n := A_n\cap \ker d_0 \cap \ldots \cap ker d_{n-1}\\
+                                         & (d\colon \overline{(A_\bullet)}_n \rightarrow \overline{(A_\bullet)}_{n-1}):=(-1)^nd_n\end{aligned}$$
+Dann gilt (s. May - SOAT, 17.4): $H_q(\overline{A})\cong \pi_qA\cong \pi_q|A|$ oder genauer f\"ur $U\colon sAb \rightarrow sSet$ der offensichtliche
+Vergissfunktor: $$H_q\circ \overline{(\cdot)} \cong \pi_q \circ |\cdot| \circ U.$$
+Au\ss erdem haben wir eine nat\"urliche Transformation $i\colon \overline{(\cdot)} \Rightarrow K$ gegeben durch die Inklusion:
+$$i|_{\overline{A_n}}\colon A_n\cap \ker d_0\cap \ldots \cap \ker d_{n-1} \rightarrow A_n.$$
+H\"ubsch ist, dass das tats\"achlich eine Kettenabbildung ist:
+$$\begin{aligned}
+i\circ d &= i \circ (-1)^nd_n&\\
+         &= (-1)^n i\circ d_n&\\
+         &= (-1)^n d_n\circ i&\\
+         &=\sum_{j=0}^{n-1}(-1)^jd_j\circ i +(-1)^n d_n \circ i &=d\circ i,
+\end{aligned}$$
+wobei die vorletzte Gleichheit daraus folgt, dass wir den Schnitt der Kerne inkludieren.\\
+So erhalten wir eine nat\"urliche Transformation:
+$$H_*(i)\colon H_*\circ \overline{(\cdot)}\Rightarrow H_*\circ K,$$
+die nach SOAT, Thm 22.1 ein nat\"urlicher Iso ist, und damit ein Iso $$H_*(i)\colon \pi_* \Rightarrow H_*\circ K.$$
+\section{Spektrensammlung}
+reeller Bordismus (symmetrisch):
+$$MO_n:=\mathbb{S}^n\wedge_{O_n}(EO_n)_+$$
+mit symmetrischer Aktion durch orthogonale Transformationen auf $\mathbb{S}^n$.\\
+$$(\Sigma^\infty K)_n := \mathbb{S}^n\wedge K$$
+mit symmetrischer Aktion auf $\mathbb{S}^n$ wie oben, insbesondere $\mathbb{S}=\Sigma^\infty\mathbb{S}^0$.\\
+$$(HA)_n := A\otimes_{\mathbb{Z}}\tilde{\mathbb{Z}}[\mathbb{S}^n]$$
+hierbei sei $\tilde{\mathbb{Z}}$reduzierte freie abelsche Gruppe - also einen Basispunkt rausteilen.\\
+Ist $A$ Ring, so erhalten wir ein Ringspektrum:
+$$(HA)_n\wedge(HA)_m = A\otimes \tilde{\mathbb{Z}}[\mathbb{S}^n]\wedge A\otimes\tilde{\mathbb{Z}}[\mathbb{S}^m] \rightarrow A\otimes\tilde{\mathbb{Z}}[\mathbb{S}^{n+m}]$$
+mit der Vorschrift:
+$$(\sum_ia_ix_i)\wedge(\sum_jb_jy_j)\mapsto\sum_{i,j}a_ib_j(x_i\wedge y_j).$$
+In symmetrischen Spektren gilt: $X$ semistabil $\Rightarrow$ $\mathbb{S}^1\wedge X$ und $sh_1X$ sind $\pi_*$-isomorph, wobei $sh_1X$ das um eine Stelle verschobene Spektrum sei.\\
+und $X$ semistabil $\Rightarrow~~ \pi_n(X^K) \cong X^{-n}(K)$.\\
+In symmetrischen Spektren betrachte $S\mathbb{Z}/p$, das mod-$p$-Moore Spektrum f\"ur $p\geq5$ eine Primzahl. Diese Moore-Spektren sind $A_\infty$ und $E_\infty$, aber es gibt keine symmetrischen
+Ring-Spektren, die sie realisieren.
+\section{Informelles \"uber $BG$}
+Es kann doch kein Zufall sein, dass die Zellen von $BG$ aussehen wie der Beweis "jeder Modul hat eine Surjektion auf sich von was Freiem": $B_1G$ sind dann die
+Erzeuger, $B_2$ die Relationen, $B_3G$ die Relationen der Relationen... in particular m\"ussten sich aus Aufl\"osungen (abelscher) Gruppen / Moduln kleinere $BG$'s bauen
+lassen. Im Stile: Je besser die Pr\"asentierung, desto netter das Modell. 
+\section{Spektren f\"ur'n $\mathbb{S}$-Modul-Kontext}
+Das $L$, das zum Vergessen von Spektren nach Pr\"aspektren linksadjungiert ist, ist (LMS) ein furchtbar undurchsichtiger Funktor, der aber besser wird,
+wenn die adjungierten Strukturabbildungen $\tilde{\sigma}\colon E_n\rightarrow \Omega^mE_{n+m}$ immer Inklusionen sind, denn dann ist es ein relativ einsichtiger
+Kolimes. Halten wir also fest, dass meine Lieblingsspektren Inklusionsspektren sind, wenn man folgende Modelle w\"ahlt:\\
+$$ku(V):=\Omega^V_0BU,$$
+wobei $\Omega_0$ f\"ur die Zusammenhangskomponente der konstanten Schleife am Basispunkt stehe. Dann sind die adjungierten Strukturabbildungen:
+$$\tilde{\sigma}\colon \Omega^V_0BU \rightarrow \Omega^W\Omega^W_0\Omega^V_0BU,$$
+die die Abb. $f\colon \mathbb{S}^V\rightarrow BU$ einfach auf die konstante Abbildung $\mathbb{S}^W\wedge\mathbb{S}^W \rightarrow \Omega^V_0BU; ~~t\wedge s \rightarrow c_f$ schickt.
+Insbesondere ist das eine Inklusion und $L$ sieht nicht mehr ganz so gruselig aus :)\\
+Eilenberg-MacLane-Spektren: Hier ist es offenbar schon so'n Ding, \"uberhaupt die Abbildungen hinschreiben zu k\"onnen, aber wir haben sogar eine ganze Familie vern\"unftiger $HG$'s f\"ur abelsches $G$:
+$$(H_nG)_k:=\begin{cases}\Omega^{n-k}B^nG & 0\leq k\leq n \\ B^kG & k\geq n\end{cases}$$
+insbesondere das einfachst denkbare Modell:
+$$(H_0G)_k:=B^kG$$
+mit den Strukturabbildungen:
+$$\begin{aligned}B^mG&\rightarrow \Omega B^{m+1}G\\z&\mapsto (t\mapsto [z,(t,1-t)]),\end{aligned}$$
+die insbesondere offensichtlich durch die Abbildungen $$B^mG\rightarrow \Omega\Sigma B^m G \rightarrow \Omega B(B^m G)$$ faktorisiert wird. (H\"ohere sauber hinschreiben ist irgendwie unerfreulich.)
+Insbesondere sollte es irgendwie rigoros m\"oglich sein, ein EM-Spektrum in der EKMM-Welt hinzuschreiben, indem man $\colim_m H_mG$ bildet, denn die $H_mG$ erf\"ullen ja immer bis $m$ die
+Hom\"oomorphie-Bedingung. Au\ss erdem sollte so meistens ne Reduktion auf $\Omega^2B^{m+2}G$ m\"oglich sein... was au\ss er Homotopie-kommutativer $H$-Raum k\"onnte mensch schlie\ss lich wollen :D
+\section{Spektralsequenzen}
+(Bott-Tu) Mensch hat ja in einem Bikomplex tats\"achlich Chancen, Differentiale oder wenigstens h\"ohere Zykel in'n Griff zu kriegen *freu* - insbesondere d\"urfte das n\"utzlich sein, um
+Beweise, die nur ganz wenig "Spektralsequenz zu nem Bikomplex" zaubern, abzuk\"urzen. Es gilt die \"Aquivalenz:
+$$x\in Z^k\Leftrightarrow \exists k-\mathrm{Zickzack} ~~(x,x_1,\ldots,x_k)$$
+und dann gilt $d^k x = x_k$. Wobei $k$-Zickzack hei\ss t: $(x_0,x_1,\ldots,x_k)$ mit $x_i\in C_{p+i,q-i}$, f\"ur die gilt: $dx_0 = 0$ und $\delta x_l = \pm dx_{l+1}$.
+(Vorsicht - das haut gradm\"a\ss ig bestimmt alles nicht hin.) Beweis: harmlose Induktion, vielleicht mal wieder machen, zum aufr\"aumen?
+\subsection{Trsf Groups}
+Wir haben offenbar einen Hom\"oomorphismus: $O_n/O_{n-1}\cong \mathbb{S}^{n-1}$, daraus sollte man doch mehr als eine Spektralsequenz brauen k\"onnen :)
+\end{document}

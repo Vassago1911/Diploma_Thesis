@@ -1,0 +1,131 @@
+\documentclass[12pt]{scrbook}
+\usepackage{a4}
+\usepackage{geometry}
+\geometry{left=25mm, right=40mm, top=25mm, bottom=25mm, footskip=10mm, pdftex} 
+\linespread{1.25}
+
+\usepackage{xypic}
+\usepackage[latin1]{inputenc}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{array, colortbl}
+\usepackage{hyperref} 
+\usepackage{paralist}
+\usepackage{dsfont}
+\setlength{\plitemsep}{2pt}
+
+\setlength{\parindent}{3mm}
+\setlength{\topmargin}{-2mm}
+\setlength{\headheight}{3mm}
+\setlength{\headsep}{5mm}
+\setlength{\textheight}{232mm}
+\setlength{\textwidth}{150mm}
+\setlength{\oddsidemargin}{-1mm}
+\setlength{\evensidemargin}{-1mm}
+
+\theoremstyle{definition}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{ex}[thm]{Example}
+\newtheorem{remi}[thm]{Reminder}
+%\newenvironment{beweis}{\begin{proof}[Beweis]}{\end{proof}}
+
+\newcommand{\quotsim}{/\!\!\sim}
+\newcommand{\D}{\ensuremath{\mathbb{D}}}
+%\newcommand{\S}{\ensuremath{\mathbb{S}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\C}{\ensuremath{\mathcal{C}}}
+\newcommand{\E}{\ensuremath{\mathcal{E}}}
+\newcommand{\B}{\ensuremath{\mathcal{B}}}
+\newcommand{\I}{\ensuremath{\lbrack 0,1 \rbrack}}
+\newcommand{\lvec}[1]{\ensuremath{\overleftarrow{#1}}}
+
+\author{Marc Lange, 11.12.2010}
+
+\begin{document}
+\chapter{Useful fact regarding $BG$}
+Let us look at these two maps from $BG$ to $B(G^{op})$:
+$$B\iota(\lbrack(g_1,\ldots,g_k), (t_0,\ldots,t_k)\rbrack)= \lbrack(g_1^{-1},\ldots,g_k^{-1}),(t_0,\ldots,t_k)\rbrack$$
+and $$\kappa(\lbrack(g_1,\ldots,g_k), (t_0, \ldots, t_k) \rbrack = \lbrack (g_k,\ldots,g_1), (t_k, \ldots, t_0) \rbrack $$.
+In \cite{burghelea1985hermitian} we have the repeated claim that these two maps are homotopic and the given homotopy is:
+$$K\colon BG \times I \rightarrow B(G^{op})$$
+$$(\lbrack(g_1,\ldots,g_k), (t_0,\ldots,t_k) \rbrack,s)$$ $$\mapsto [(g_k, \ldots,g_1, g_1^{-1},\ldots,g_k^{-1}), s(t_k,\ldots,t_0,0_k) + (1-s)(0_k,t_0,\ldots,t_k)]$$
+Since it is quite a nuisance to check, if this is well-defined, I do this here for all eternity :D Although in all honesty this is more of a long hint on which indices to calculate to convince yourself that this works.
+\section{Well-defined on $BG$-faces $d_i$}
+Let $g = (g_1,\ldots,g_k)$ and $t = (t_0,\ldots,t_k)$. Furthermore $0_k$ is a "'fat zero"' with $k$ entries, $\overleftarrow{g}$ as well as $\overleftarrow{t}$ denote the reversing of coordinates and $g^{-1}$ are coordinate-wise inverses. Which makes $K$ a lot more readable as follows: $$K(\lbrack g,t\rbrack ,s)=\lbrack(\overleftarrow{g},g^{-1}),
+s(\lvec{t},0_k)+(1-s)(0_k,t)\rbrack$$\newpage 
+\subsection{$d_0$}
+Let $g = (g_1,\ldots,g_k)$ and $t = (t_0,\ldots,t_{k-1})$.\\
+$K(\lbrack g, d_0 t\rbrack,s) = K(\lbrack (g_1,\ldots,g_k) , (0,t_0,\ldots,t_{k-1})\rbrack, s) \\
+=\lbrack(\lvec{g},g^{-1}), s(\lvec{t},0,0_k) + (1-s)(0_k,0,t)\rbrack\\
+=\lbrack(\lvec{g},g^{-1}), d_k(s(\lvec{t},0_k) + (1-s)(0_k,t) \rbrack\\
+=\lbrack d_k(\lvec{g},g^{-1}),s(\lvec{t},0_k) + (1-s)(0_k,t) \rbrack\\
+=\lbrack (\lvec{d_0 g},1,{(d_0 g)}^{-1}),s(\lvec{t},0_k) + (1-s)(0_k,t) \rbrack\\
+=\lbrack s_{k-1}(\lvec{d_0 g},(d_0 g)^{-1}),s(\lvec{t},0_k) + (1-s)(0_k,t) \rbrack\\
+=\lbrack (\lvec{d_0 g},(d_0 g)^{-1}),s_{k-1}(s(\lvec{t},0_k) + (1-s)(0_k,t) ) \rbrack \\
+=\lbrack (\lvec{d_0 g},(d_0 g)^{-1}),(s(\lvec{t},0_{k-1})+(1-s)(0_{k-1},t))\rbrack\\
+=K(\lbrack d_0g, t \rbrack, s) ~~~~~~\checkmark$
+\subsection{$d_k$}
+$K(\lbrack d_k g, t \rbrack , s) = \lbrack (\lvec{d_k g }, (d_k g)^{-1}), s(\lvec{t},0_{k-1}) + (1-s) (0_{k-1},t) \rbrack \\
+= \lbrack d_0 (\lvec{g},(d_k g)^{-1}),  s(\lvec{t},0_{k-1}) + (1-s) (0_{k-1},t) \rbrack\\
+= \lbrack d_0d_{2k}(\lvec{g},g^{-1}),  s(\lvec{t},0_{k-1}) + (1-s) (0_{k-1},t) \rbrack\\
+= \lbrack (\lvec{g},g^{-1}), d_{2k}d_0(  s(\lvec{t},0_{k-1}) + (1-s) (0_{k-1},t)) \rbrack\\
+= \lbrack (\lvec{g},g^{-1}), d_{2k}(s(0,\lvec{t},0_{k-1}) + (1-s)(0_k,t)) \rbrack \\
+= \lbrack (\lvec{g},g^{-1}), s(\lvec{d_k t},0_k) + (1-s) (0_k,d_k t) \rbrack \\
+= K(\lbrack g, d_k t \rbrack ,s) ~~~~~~\checkmark$
+\subsection{$d_i$ ~~ for $i = 1,\ldots, k-1$}
+$K(\lbrack d_i g, t \rbrack, s) = \lbrack (\lvec{d_i g}, (d_i g)^{-1}), s(\lvec{t},0_{k-1}) + (1-s) (0_{k-1},t) \rbrack\\
+= \lbrack d_{k-i}(\lvec{g},(d_i g)^{-1}), s(\lvec{t},0_{k-1}) + (1-s) (0_{k-1},t) \rbrack\\
+= \lbrack d_{k-i}d_{k+i}(\lvec{g},g^{-1}),s(\lvec{t},0_{k-1}) + (1-s) (0_{k-1},t) \rbrack\\
+= \lbrack (\lvec{g},g^{-1}), d_{k+i}d_{k-i}(s(\lvec{t},0_{k-1}) + (1-s)(0_{k-1},t)) \rbrack \\
+= \lbrack (\lvec{g},g^{-1}), d_{k+i}(s(\lvec{d_i t},0_{k-1}) + (1-s) ( 0_k,t))\rbrack \\
+= \lbrack (\lvec{g},g^{-1}), s(\lvec{d_i t},0_k)  + (1-s)(0_k,d_i t) \rbrack \\
+= K(\lbrack g, d_i t \rbrack,s)~~~~~~ \checkmark$ \newpage
+\section{Well-defined on $BG$-degeneracies $s_i$}
+Now let $g= (g_1, \ldots, g_{k-1})$ and $t = (t_0,\ldots, t_k)$. All the other notations remain.
+\subsection{$s_0$}
+$K(\lbrack s_0 g, t \rbrack , s) = \lbrack (\lvec{g},1,1,g^{-1}), s(\lvec{t}, 0_k) + (1-s)(0_k,t) \rbrack\\
+=\lbrack s_k(\lvec{g},1,g^{-1}),s(\lvec{t}, 0_k) + (1-s)(0_k,t) \rbrack\\
+= \lbrack s_k s_{k-1}(\lvec{g},g^{-1}),s(\lvec{t}, 0_k) + (1-s)(0_k,t) \rbrack\\
+=\lbrack(\lvec{g},g^{-1}),s_{k-1}s_k(s(\lvec{t}, 0_k) + (1-s)(0_k,t)) \rbrack\\
+=\lbrack(\lvec{g},g^{-1}),s_{k-1}(s(\lvec{t},0_{k-1}) +(1-s)(0_k,s_0 t ) )\rbrack \\
+=\lbrack(\lvec{g},g^{-1}),(s(\lvec{s_0 t},0_{k-1}) +(1-s)(0_{k-1},s_0 t ) )\rbrack \\ 
+=K(\lbrack g, s_0 t \rbrack, s)~~~~~~\checkmark$
+\subsection{$s_{k-1}$}
+ -- (Attention: this is the right-most $s_i$ according to the choice of $g$ and $t$)\\
+$K(\lbrack s_{k-1} g, t \rbrack , s) = \lbrack (1,\lvec{g},g^{-1},1), s(\lvec{t}, 0_k) + (1-s)(0_k,t) \rbrack\\
+=\lbrack s_{2k}(1,\lvec{g},g^{-1}),s(\lvec{t}, 0_k) + (1-s)(0_k,t) \rbrack\\
+= \lbrack s_{2k}s_0(\lvec{g},g^{-1}),s(\lvec{t}, 0_k) + (1-s)(0_k,t) \rbrack\\
+=\lbrack(\lvec{g},g^{-1}),s_0s_{2k}(s(\lvec{t}, 0_k) + (1-s)(0_k,t)) \rbrack\\
+=\lbrack(\lvec{g},g^{-1}),s_0(s(\lvec{t},0_{k-1}) +(1-s)(0_k,s_{k-1} t ) )\rbrack \\
+=\lbrack(\lvec{g},g^{-1}),(s(\lvec{s_{k-1} t},0_{k-1}) +(1-s)(0_{k-1},s_{k-1} t ) )\rbrack \\ 
+=K(\lbrack g, s_{k-1} t \rbrack, s)~~~~~~\checkmark$
+\subsection{$s_i$ for $i = 1,\ldots, k-2$}
+$K(\lbrack s_i g, t \rbrack,s ) = \lbrack ( \lvec{s_i g}, (s_i g)^{-1}),  s(\lvec{t}, 0_k) + (1-s)(0_k,t) \rbrack\\
+= \lbrack s_{k-i-1}(\lvec{g},(s_i g)^{-1}), s(\lvec{t},0_k) + (1-s)(0_k, t) \rbrack \\
+= \lbrack s_{k-i-1}s_{k+i-1}(\lvec{g},g^{-1}),s(\lvec{t},0_k) + (1-s)(0_k, t) \rbrack \\
+= \lbrack (\lvec{g},g^{-1}),s_{k+i-1}s_{k-i-1}(s(\lvec{t},0_k) + (1-s)(0_k, t))\rbrack \\
+= \lbrack (\lvec{g},g^{-1}),s_{k+i-1}(s(\lvec{s_i t},0_k) + (1-s)(0_{k-1}, t))\rbrack \\
+= \lbrack (\lvec{g},g^{-1}),s(\lvec{s_i t},0_{k-1}) + (1-s)(0_{k-1},s_i t)\rbrack \\
+= K(\lbrack g, s_i t \rbrack,s ) ~~~~~~\checkmark$\newpage
+\section{Conclusion}
+So $K$ is a well-defined map, and now we can check, what it does\\  $g= (g_1,\ldots,g_k), t= (t_0,\ldots, t_k)$:\\
+$K(\lbrack g,t\rbrack,0) = \lbrack(\lvec{g},g^{-1}), (0_k,t) \rbrack = \lbrack(\lvec{g},g^{-1}), {d_0}^k t\rbrack = \lbrack {d_0}^k(\lvec{g},g^{-1}),t\rbrack
+=\lbrack g^{-1}, t \rbrack = B\iota \lbrack g,t\rbrack $
+and 
+$K(\lbrack g,t\rbrack, 1) = \lbrack(\lvec{g},g^{-1}),(\lvec{t},0_k)\rbrack = \ldots = \lbrack \lvec{g}, \lvec{t}\rbrack = \kappa\lbrack g, t \rbrack$
+Regarding the "'$\ldots$"': It is mostly clear what happens here, but not quite descriptive if written down. Mainly the $k$ zeroes in the $t$-coordinate allow for cutting off the last $k$ entries in the $g$-coordinate, which is precisely the coordinates of $g^{-1}$.
+\bibliographystyle{plain}
+\bibliography{bibl.bib} 
+\end{document}
