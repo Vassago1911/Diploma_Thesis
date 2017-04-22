@@ -1,0 +1,80 @@
+\documentclass[11pt,twoside,a4paper]{scrbook} %11pt+=oneside
+\usepackage{a4}
+%\usepackage{geometry}
+\usepackage{lscape}
+%\geometry{left=25mm, right=40mm, top=25mm, bottom=25mm, footskip=5mm}%, pdftex}
+\linespread{1.2}
+
+\usepackage[all]{xy}
+%\usepackage[latin1]{inputenc}
+\usepackage{times}
+%\usepackage[T1]{fontenc}
+%\usepackage{yfonts}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+%\usepackage{mathbbol} <-experimentell - soll die Doppelstrich-Eins ermöglichen (!) tut's! - aber zerhaut \N \Z etc.
+%\usepackage{array,colortbl}
+\usepackage{hyperref}
+%\usepackage{dsfont}
+\usepackage{fancyhdr}
+
+\theoremstyle{definition}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{ex}[thm]{Example}
+\newtheorem{remi}[thm]{Reminder}
+%\newenvironment{beweis}{\begin{proof}[Beweis]}{\end{proof}} <- as a reminder: gibt's schon!!! :D
+
+\newcommand{\colim}{\ensuremath{\mathrm{colim}}}
+\newcommand{\quotsim}{/\!\!\sim}
+\newcommand{\D}{\ensuremath{\mathbb{D}}}
+\renewcommand{\S}{\ensuremath{\mathbb{S}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\R}{\ensuremath{\mathcal{R}}}
+\newcommand{\C}{\ensuremath{\mathcal{C}}}
+\newcommand{\I}{\ensuremath{\lbrack 0,1 \rbrack}}
+
+\title{{\Huge{Examples of Involutions on Algebraic $K$-Theory of Bimonoidal Categories}}}
+\author{Marc Lange \vspace{3 cm}\\ Diplomarbeit am Fachbereich Mathematik,\\Universit\"at Hamburg \vspace{1 cm}\\Betreuerin: Prof. Dr. Birgit Richter}
+\date{(Korrigierte Version) 16. April 2011}
+
+\begin{document}
+\titlepage
+\maketitle
+\clearpage
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[LE]{\slshape \rightmark}
+\fancyhead[RO]{\slshape \leftmark}
+\fancyfoot[LE,RO]{\thepage}
+
+\include{00-Introduction}
+\tableofcontents
+\include{01-Intro-K-Th}
+\include{02-Intro-K-Th-inv}
+\include{03-Inv-Biperm}
+\include{04-Non-trivial-Invs}
+\include{05-HH-tr}
+\clearpage
+\bibliographystyle{plain}
+\bibliography{Bibliography.bib}
+\newpage
+\thispagestyle{empty}
+%\section*{Eidesstattliche Versicherung}
+%Ich versichere an Eides statt, dass ich die Arbeit selbstst\"andig verfasst und keine anderen als die angegebenen Hilfsmittel und Quellen benutzt habe.\\[5ex]
+%$\overline{\mathbf{Marc~ Lange,~ Itzehoe,~ 02.03.2011}}$
+\end{document}
+
+
+
+

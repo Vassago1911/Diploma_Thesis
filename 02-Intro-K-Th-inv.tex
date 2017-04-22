@@ -1,0 +1,209 @@
+\chapter{$K$-Theory of Rings with (Anti-)Involution}
+The central notion for this diploma thesis is the following definition.
+
+\defn{Let $R$ be a unital (not necessarily commutative) ring. A map $\tau\colon R \rightarrow R$, which is
+additive and satisfies the conditions:
+\begin{itemize}
+   \item $\tau(ab)=\tau(b)\tau(a),$
+   \item $\tau(1) = 1,$
+   \item $\tau^2 = id_R$
+\end{itemize}
+is called an (anti-)involution on $R$.
+Of course $\tau$ can as well be understood as a unital ring homomorphism $\tau\colon R \rightarrow R^{op}$.}
+
+Naturally the anti-involution on $R$ should induce a map on the $K$-groups of $R$.
+In what follows I am mainly following the lines of Burghelea and Fiederowicz \cite{BF},
+although I can drastically simplify their approach for an algebraic, discrete ring
+instead of a simplicial ring.
+To unify the vocabulary, I will mostly speak of involutions, which for a ring will mean
+anti-involution without exception and for groups just a self-inverse homomorphism.
+
+\section{The Induced Involution on the $K$-Theory Space}
+
+In order to induce an involution on the $K$-theory of $R$ it is useful to induce a map on the
+general linear group of $R$ first. This involves the following maps:
+
+\lemma{
+Transposition is a morphism of matrix rings $$T\colon M_r(R) \rightarrow M_r(R^{op})^{op},$$ and hence also
+induces a morphism of the linear groups $T\colon GL_r(R) \rightarrow GL_r(R^{op})^{op}.$
+
+Inverting group elements is a morphism $$\iota\colon G \rightarrow G^{op}.$$
+
+Each anti-involution of $R$ induces a morphism $$M_r(\tau) \colon M_r(R) \rightarrow M_r(R^{op})$$ and in particular analogous to the transposition thus induces a homomorphism of linear groups $GL_r(\tau)\colon GL_r(R) \rightarrow GL_r(R^{op})$.
+
+\begin{proof}
+In the case of the transposition, denote by $\circ$ the multiplication of $R^{op}$ and $M_r(R^{op})^{op}$ and find
+$$\begin{aligned}
+  T(A\cdot B)_{i,j}&=(A\cdot B)_{j,i}\\
+&=\sum\limits_{k=1}^r A_{j,k}B_{k,i}\\
+&=\sum\limits_{k=1}^r TA_{k,j}TB_{i,k}\\
+&=\sum\limits_{k=1}^r TB_{i,k}\circ TA_{k,j}\\
+&=(TB\cdot TA)_{i,j} = (TA\circ TB)_{i,j},
+  \end{aligned}$$
+which proves that transposition is a ring homomorphism $$T\colon M_r(R)\rightarrow M_r(R^{op})^{op}.$$
+
+In case of the inverse map the relation $(ab)^{-1}=b^{-1}a^{-1}$ is a standard fact.
+
+Per definition an anti-involution opposes the ring structure componentwise and assigning to each ring its $r\times r$-matrices (for fixed $r\in \N$) is an endofunctor of unital rings $M_r(\_)\colon Rng_1 \rightarrow Rng_1$, thus the claim follows.
+\end{proof}\label{tools}}
+
+\lemma{
+Each of the three maps of lemma \ref{tools} commute, that is $\iota \circ T = T \circ \iota$, $T\circ GL_r(\tau) = GL_r(\tau)\circ T$ and $GL_r(\tau)\circ \iota = \iota \circ GL_r(\tau)$.
+\begin{proof}
+The equality $\iota \circ T = T \circ \iota$ is equivalent to the claim $(TA)^{-1} = T(A^{-1})$, which is equivalent to the statement $T(A^{-1})TA = 1_r$,
+but this simplifies as follows, since $T(1_r)=1_r$
+$$T(A^{-1})TA= T(AA^{-1})=T(1_r)=1_r.$$
+Hence follows $T(A^{-1})=(TA)^{-1}$.
+
+The fact that transposition and componentwise involution commute follows by the calculation
+$$
+\begin{aligned}
+(GL_r(\tau)\circ T(A))_{i,j} &= \tau(TA_{i,j}) \\&=\tau(A_{j,i})\\&=(GL_r(\tau)(A))_{j,i}\\&=T(GL_r(\tau)(A))_{i,j}.
+\end{aligned}
+$$
+
+The inverse map and componentwise involution commute, since $\tau(1)=1$, which implies
+ $1_r=GL_r(\tau)(AA^{-1})=GL_r(\tau)(A)GL_r(\tau)(A^{-1})$ and hence gives the equation $GL_r(\tau)(A^{-1})=(GL_r(\tau)(A))^{-1}$.
+
+\end{proof}
+}
+
+\defn{For $R$ a ring with anti-involution $\tau$, the endomorphism of the linear group induced by composition of inverting, transposition and componentwise involution
+{$$\begin{aligned} \tau_* \colon & GL_r(R) \rightarrow GL_r(R)\\
+& \tau_* := T\circ \iota \circ GL_r(\tau)
+\end{aligned}$$}
+ is defined to be the homomorphism induced by the involution $\tau$.}
+
+\rem{By the preceding lemma $\tau_*$ is again its own inverse, since each of the factors is self-inverse and they commute. Furthermore note that $\tau_*$ is stable with
+respect to the inclusions $j_r\colon GL_r(R) \rightarrow GL_{r+1}(R)$, since each of the factors evidently is. This shows that there is an induced homomorphism on
+$GL(R)$ as well.}
+
+It is essential to see that $\tau_*$ also preserves elementary matrices:
+
+\lemma{The induced involution on $GL(R)$ is a map $\tau_*\colon GL(R) \rightarrow GL(R),$ which preserves elementary matrices, i.e. $\tau_*(E(R))\subset E(R)$.
+\begin{proof}
+The inverse of an elementary matrix is another elementary matrix by the equation $e_{ij}(\lambda)e_{ij}(-\lambda)=1_n$.
+Quite obviously the transposition gives $e_{ji}(\lambda)^t = e_{ij}(\lambda)$. Each involution fixes the unit $\tau(1) = 1$, which implies
+$GL_r(\tau)(e_{ij}(\lambda)) = e_{ij}(\tau(\lambda))$. So each factor preserves elementary matrices and hence the
+induced involution $\tau_*$ preserves elementary matrices as well.\end{proof} }
+
+\cor{\label{indinvK} For $R$ a (not necessarily commutative) ring with anti-involution $\tau$, there is an induced involution on the $K$-theory of $R$.
+\begin{proof}
+As noted there is an induced map $\tau_*\colon BGL(R) \rightarrow BGL(R),$ hence there is a map of geometric realisations
+as well $|\tau_*|\colon |BGL(R)| \rightarrow |BGL(R)|$. Composed with the inclusion $|BGL(R)| \rightarrow |BGL(R)|^+$,
+this induces the canonical projection on fundamental groups $$GL(R) \rightarrow GL(R)/E(R).$$
+
+The universal property of the plus construction (with respect to $E(R)$) describes a map $$f\colon |BGL(R)|\rightarrow Z$$ to a space $Z$ with
+$\ker(f_*\colon \pi_1(|BGL(R)|)\rightarrow \pi_1(Z))\subset E(R)$ as a product of the inclusion into the plus-construction
+$|BGL(R)|\rightarrow |BGL(R)|^+$ and a map $\bar f$ as follows
+$$
+\xymatrix{
+|BGL(R)| \ar[r]^{~~f} \ar[d]& Z\\
+|BGL(R)|^+.\ar[ur]_{\bar f}&
+}
+$$
+Furthermore $\bar f$ is determined uniquely up to homotopy (cf. Theorem \ref{plus}). In particular,
+since the induced homomorphism $\tau_*\colon GL(R) \rightarrow GL(R)$ preserves
+elementary matrices, there is a map on the plus-construction $\tau_*^+\colon|BGL(R)|^+ \rightarrow |BGL(R)|^+$ such that the following diagram
+commutes up to homotopy
+$$
+\xymatrix{ |BGL(R)| \ar[r]^{\tau_*} \ar[d]& |BGL(R)|\ar[d]\\
+           |BGL(R)|^+ \ar[r]^{{\tau^+}_*}  &|BGL(R)|^+ \\ }
+$$
+and thus gives a map $\tau_*\colon K_i(R) \rightarrow K_i(R)$ for $i\geq 1$. \end{proof}}
+
+By the same argument there is an induced involution on group homology of $GL(R)$ as well, which will later be useful in the investigation of trace maps.
+
+\cor{For $R$ a (not necessarily commutative) ring with anti-involution $\tau$, there is an induced involution on group (co-)homology of $GL(R)$.
+\begin{proof}
+The map $\tau_*\colon BGL(R) \rightarrow BGL(R)$ passes on to geometric realisation. In singular homology
+(with arbitrary coefficients) this yields the induced involution (cf. Theorem \ref{alleshomologie}).
+\end{proof}\label{indinvH}}
+
+It is quite obvious that even in this basic stage there are a lot of identifications, which
+ought to be compatible with each induced involution. So the next statement is just asserting
+that everything is coherently defined.
+
+\thm[Involution on $H_*(GL(R))$]
+{The evident involution on the bar complex (cf. Definition \ref{AbBar}) given by applying the induced involution componentwise
+$$\tau_*(g_1,\ldots,g_n) := (\tau_*(g_1),\ldots,\tau_*(g_n))$$ yields the same involution on $H_*(GL(R),\Z)$ as singular homology with $\Z$-coefficients
+on $|BGL(R)|$ does.
+\begin{proof}
+It is legitimate to think of the bar complex $B_*(\Z \lbrack GL(R) \rbrack)$ as the chain complex
+of abelian groups associated to the simplicial set $BGL(R)$. The induced homomorphism is applied componentwise as
+$B\tau_*(g_1,\ldots,g_n):=(\tau_*(g_1),\ldots,\tau_*(g_n))$, so on the geometric realisation this is
+
+$|B\tau_*|(\lbrack (g_1,\ldots,g_n), (t_0,\ldots,t_n) \rbrack ) = \lbrack (\tau_*(g_1),\ldots,\tau_*(g_n)), (t_0,\ldots,t_n) \rbrack$.
+
+In particular $|B\tau_*|$ is not just cellular, it maps one cell precisely to one other cell in an orientation-preserving manner.
+Thus on cellular chains, it maps one basis element to another by the same formula as on $BGL(R)$ before. \end{proof}\label{H=H=H}}
+
+The plus construction preserves homology and thus provides an alternative to induce an involution on the homology of $|BGL(R)|^+$.
+By the following result this induces the same involution.
+
+\prop{
+For $\tau_*\colon |BGL(R)| \rightarrow |BGL(R)|$ the induced map on the classifying space of the general linear group and $\tau_*^+$ the induced map on the plus-construction $\tau_*^+\colon |BGL(R)|^+ \rightarrow |BGL(R)|^+$
+the isomorphism given by the inclusion into the plus-construction $i_* \colon H_*(|BGL(R)|) \rightarrow H_*(|BGL(R)|^+)$ transforms one involution into the other.
+\begin{proof}
+The homology-isomorphism is a consequence of the fact that the $1$-cells corresponding to elements in $E(R)$ are boundaries of additional $2$-cells.
+By adding another set of $3$-cells, the effect of these $2$-cells on homology is removed. This shows that the effect of
+$\tau_*$ on homology is the same on non-trivial cycles, since they came from $|BGL(R)|$ anyway.
+\end{proof}}
+
+For later reference the results summarise to the following statement:
+
+\thm[Coherence of the Involutions]{\label{coherence} The induced involution on $K$-theory \ref{indinvK} and group homology \ref{indinvH}
+commutes with the Hurewicz homomorphism and the homology isomorphism of the plus-construction.
+\begin{proof}
+For the Hurewicz homomorphism $h\colon K_i(R) \rightarrow H_i(GL(R))$ the following commutative diagram is commutative, since the
+Hurewicz homomorphism is natural with respect to continuous maps
+$$
+\xymatrix{
+K_i(R)=\pi_i(|BGL(R)|^+) \ar[r]^{~~~~~~~~\pi_i(\tau_*)} \ar[d]^h & K_i(R) \ar[d]^h\\
+H_i(|BGL(R)|^+,\Z)\ar[r]^{H_i(\tau_*)} & H_i(|BGL(R)|^+,\Z).
+}$$
+Furthermore the identification chain $$H_i(|BGL(R)|^+,\Z) \cong H_i(|BGL(R)|,\Z) \cong H_i(BGL(R),\Z) = H_i(GL(R))$$ commutes
+with induced involution as well by theorem \ref{H=H=H} .
+\end{proof}}
+
+\section{Involution and Determinant}
+Since in the following I mainly concentrate on $K_1$ for explicit calculations, I will need the following results on
+how the determinant behaves with respect to the induced involution on $GL(R)$.\\[2ex]
+
+\lemma{
+For $R$ a commutative ring with $\tau$ an involution, $R^\times$ its group of units and $$\det\colon GL(R) \rightarrow R^\times$$ the determinant map,
+there are the following equalities:
+\begin{enumerate}
+ \item[(1)] $\det \circ GL_r(\tau) = \tau \circ \det,$
+ \item[(2)] $\det \circ T = \det,$
+ \item[(3)] $\det \circ \iota_{GL_r(R)} = \iota_{R^\times} \circ \det.$
+\end{enumerate}
+
+\begin{proof}
+(1) For $A\in GL_r(R)$ calculate
+$$
+\begin{aligned}
+\det(GL_r(\tau)(A)) &=\sum_{\sigma\in\Sigma_r} \mathit{sgn}(\sigma) (GL_r(\tau)(A))_{1,\sigma(1)}\cdot \ldots \cdot (GL_r(\tau)(A))_{r,\sigma(r)}\\
+&=\sum_{\sigma\in\Sigma_r} \mathit{sgn}(\sigma) \tau(A_{1,\sigma(1)})\cdot \ldots \cdot\tau(A_{r,\sigma(r)})\\
+&=\tau\left(\sum_{\sigma\in\Sigma_r} \mathit{sgn}(\sigma)A_{1,\sigma(1)}\cdot \ldots \cdot A_{r,\sigma(r)}\right)\\
+&=\tau(\det(A)).\\
+\end{aligned}
+$$
+In particular note that this of course needed commutativity.
+
+(2) The fact that transposition does not change the value of the determinant is a well-known fact of linear algebra, which is still true for commutative rings.
+
+(3) The determinant transfers inverting matrices into inverting ring units, since the determinant is multiplicative $\det(AB)=\det(A)\det(B)$ for arbitrary
+commutative unital rings. This implies $$1=\det(1_r)=\det(A^{-1}A)=\det(A^{-1})\det(A)$$ and hence $\det(A^{-1})= \det(A)^{-1}$.
+\end{proof}\label{detinv}
+}\newpage
+The induced involution on $K_1$ is thus transformed in the following manner:
+\cor{The determinant map and the induced involution commute as follows
+$$\det \circ \tau_* = i\circ \tau \circ \det.$$
+\phantom{blubbel}\hfill$\Box$}
+
+Therefore on the group of units, included as a subgroup in $K_1$, induced involutions look precisely as expected:
+
+\prop{\label{invonunits} For $j\colon R^\times \rightarrow K_1(R)$ the inclusion of units with $\det \circ j = id_{R^\times}$, the involution restricts as
+ $$\tau_*|_{j(R^\times)}=\iota_{R^\times}\circ \tau.$$
+\phantom{blubbel}\hfill$\Box$}

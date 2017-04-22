@@ -1,0 +1,496 @@
+\chapter{Involutions on Bimonoidal Categories}
+So far the involution defined in Richter \cite{richter2010involution} does not directly apply to the preceding chapters.
+This section summarises the results and definitions of \cite{richter2010involution} such that later chapters
+of this diploma thesis provide non-trivial examples of involutions on $K$-theory, which are induced by involutions of
+simplicial rings according to Burghelea and Fiedorowicz \cite{BF} as well as
+involutions on bimonoidal categories as defined by Richter \cite{richter2010involution}.
+
+Let $\R$ be a small category in this section. Following \cite[Introduction of Chapter 2]{richter2010involution} and
+ \cite[Definition 3.3]{elmendorf2006rings} I define a (strict) bimonoidal category as follows:
+\defn{
+A strict bimonoidal category $\R$ is a category with two functors $\oplus, \otimes \colon \R\times \R \rightarrow \R$ and two distinguished objects $0,1$
+together with a natural transformation $c^{A,B}_\oplus\colon A\oplus B \rightarrow B\oplus A$ and a natural isomorphism
+$d_l\colon A\otimes B \oplus A\otimes B' \rightarrow A\otimes (B\oplus B')$, which are subject to the following conditions:
+\begin{itemize}
+ \item addition and multiplication $\oplus$ and $\otimes$ are strictly associative
+ $$A\oplus(B\oplus C)=(A\oplus B)\oplus C ~~~~ A\otimes(B\otimes C)=(A\otimes B) \otimes C,$$
+ \item the zero and the unit element are strictly neutral
+ $$ A\oplus {0} = {0} \oplus A = A ~~~~ 1\otimes A = A\otimes 1 = A,$$
+ \item the zero element strictly multiplies to zero and there is one strict distributivity
+ $$A\otimes 0 = 0 \otimes A = 0 ~~~~ A\otimes B \oplus A' \otimes B = (A\oplus A')\otimes B,$$
+ \item and the additive twist is a self-inverse map
+ $$c^{B,A}_{\oplus}\circ c^{A,B}_{\oplus} = id_{A\oplus B}.$$
+\end{itemize}
+
+Furthermore the natural transformations have to satisfy a (long) list of coherence conditions, which are spelled out in Laplaza \cite{laplaza1972coherence} on
+pages 31-35 .
+
+\label{bimoncat}
+}
+
+The following example illustrates why this is a suitable category analogue for rings.
+
+\ex{To each ring $R$ associate a discrete category $\R_R$ with the following data:
+\begin{itemize}
+  \item $Ob\R_R = R,$
+  \item $r\oplus s := r+s,$
+  \item $r\otimes s := rs.$
+\end{itemize}\label{ringbiperm}
+This is a strict bimonoidal category, where each of the natural transformations is the identity.}
+
+Of course there are also more interesting examples:
+
+\ex{\cite[Example 2.3]{baas2009ring}
+For each natural number $n$ denote by $\lbrack n \rbrack$  the following set $\lbrack n\rbrack:=\{1,\ldots,n\}$. Consider the following category $E$ with
+\begin{itemize}
+\item $Ob E = \{{\lbrack n\rbrack}|n\in\N\}$
+\item $E({\lbrack n\rbrack},{\lbrack m\rbrack})=\{f\colon \{1,\ldots,n\}\rightarrow \{1,\ldots,m\}~|~f\in Set({\lbrack n \rbrack},{\lbrack m\rbrack})\},$
+\end{itemize}
+which is a skeleton of the category of finite sets. Set $\lbrack n \rbrack \oplus \lbrack m \rbrack := \lbrack n+m\rbrack$, which extends to morphisms in the
+following fashion (for $f\colon \lbrack n\rbrack \rightarrow \lbrack n'\rbrack$ and $g\colon \lbrack m \rbrack \rightarrow \lbrack m'\rbrack$)
+$$(f\oplus g)(i) :=\begin{cases}
+                    f(i) & ~~\mathrm{for}~~ 1\leq i \leq n \\
+                    n' + g(n-i) & ~~\mathrm{for} ~~ n+1\leq i \leq n+m.
+                   \end{cases}$$
+Define $c_\oplus\colon \lbrack n+m\rbrack\rightarrow \lbrack m+n\rbrack$ by the formula
+$$
+\begin{aligned}(c_\oplus)_{n,m} \colon \lbrack &n+m\rbrack \rightarrow \lbrack m+n\rbrack\\
+ &i \mapsto {\begin{cases}
+			 m+i ~~~ &  \mathrm{~~for~~} 1\leq i\leq n\\
+                         i-n ~~~ &\mathrm{~~for~~} n+1\leq i \leq n+m,
+                       \end{cases}}
+\end{aligned}
+$$
+which is obviously natural in $n$ and $m$. Furthermore observe that $\oplus$ is strictly associative and $\lbrack 0 \rbrack := \emptyset$ is a strict unit with respect to $\oplus$.
+
+Consider the multiplication $\lbrack n \rbrack \otimes \lbrack m \rbrack := \lbrack nm\rbrack$. This is extended to morphisms by choosing a natural bijection $\lbrack n \rbrack \times \lbrack m \rbrack \cong \lbrack nm\rbrack$ and applying morphisms componentwise,
+which I will not display in detail. The multiplication has a twist $c_\otimes$ as well, is strictly associative and has $\lbrack 1\rbrack$ as a strict unit.
+
+Restricted to isomorphisms this gives $$E(\lbrack n\rbrack,\lbrack m\rbrack)=\begin{cases}
+                                                                                                       \Sigma_n &\mathrm{~~for~~} m=n\\
+												       \emptyset & \mathrm{~~otherwise~~}
+                                                                                                      \end{cases}$$}
+
+\ex{Depending on the context the objects $\lbrack n\rbrack$ can also be understood as dimensions or ranks of modules to give another category. The particular example $\mathcal{V}$ of Baas, Dundas and Rognes \cite{baas2004two} is given by
+$$
+\mathcal{V}(\lbrack n \rbrack, \lbrack m \rbrack) :=\begin{cases}
+                                                     U(n) & \mathrm{~for~} n=m\\
+						     \emptyset & \mathrm{~otherwise},
+                                                    \end{cases}
+$$
+which is a skeleton of the category finite dimensional complex (unitary) vector spaces with just isomorphisms, which preserve the scalar product.\\
+}
+
+There is a category of matrices for strict bimonoidal categories:
+
+\defn{The category of $n\times n$-matrices over $\R$, denoted as $M_n(\R)$, is the following
+\begin{itemize}
+ \item Objects are matrices of objects in $\R$ $$Ob M_n(\R) := \{(A_{i,j})_{i,j=1,\ldots,n}| A_{i,j}\in Ob\R\},$$
+ \item Morphisms are matrices of morphisms between the respective components
+$$Mor(A,B) := \{(\varphi_{i,j})_{i,j=1,\ldots,n}| \varphi_{i,j} \in \R(A_{i,j},B_{i,j})\}.$$
+\end{itemize}
+}
+
+Checking the following lemma from \cite{richter2010involution} is tedious, but straightforward:
+
+\lemma{\cite[Lemma 2.2]{richter2010involution}
+For a bimonoidal category $(\R,\oplus,0,c_\oplus,\otimes,1_\R)$ the category of $n\times n$-matrices is a monoidal category with the usual
+matrix multiplication
+$$(A\cdot B)_{i,j}:=\bigoplus\limits_{k=1}^n A_{i,k}\otimes B_{k,j}.$$
+Its unit is the unit matrix $1_n$ with $1_\R$ on the diagonal and zeroes everywhere else. Its associator $\alpha$ can be given by the distributivity morphisms in $\R$,
+whereas the left and right unitor morphisms $\lambda\colon 1_n \cdot A \rightarrow A$ and $\rho\colon A\cdot 1_n \rightarrow A$ are identities.\hfill$\Box$
+}
+
+\rem{
+The fact that $\alpha$ can be expressed by distributivity morphisms on the components, in particular implies that in the case, where both distributivity transformations are identities, the monoidal category
+of matrices $M_n(\R)$ will be strict w.r.t. $\otimes$ as well.
+}
+
+Let $\R$ be a small bimonoidal category. Then its set of path components $\pi_0\R = \pi_0(|B\R|)$ is a ring except for additive inverses.
+(Also called ring without negatives, rig.) Since the sum $\oplus$ induces the structure of an abelian monoid, the usual group completion with respect to 
+$\oplus$, i.e. $Gr(\pi_0(\R))= (-\pi_0\R)\pi_0\R$, yields a ring. Set $R:=(-\pi_0 \R)\pi_0 R$ and call $R$ the ring associated to the bimonoidal category $\R$.
+
+Denoting by $GL_n(\R)$ the matrices which have inverse matrices, would yield far too few matrices to be interesting for a general bimonoidal
+category. For example, for $\N$ regarded as a bimonoidal category this would only yield permutation matrices. In order to get some more variety,
+weaken the invertibility as follows:
+
+\defn{
+The monoid of weakly invertible $n\times n$-matrices over the rig $\pi_0(\R)$, denoted by $GL_n(\pi_0(\R))$ is defined to be matrices in $M_n(\pi_0(\R))$,
+which are invertible if included into matrices over the ring associated to $\R$, i.e. in $M_n(R)=M_n(Gr(\pi_0\R))$.
+}
+
+With this define the category of weakly invertible matrices:
+
+\defn{
+The category of weakly invertible $n\times n$-matrices over $\R$ is defined as the full subcategory of $M_n(\R)$ with matrices $A$ such that the projection
+to $\pi_0$-classes $\lbrack A \rbrack$ is in the weakly invertible matrices over $\pi_0(\R)$, i.e. $GL_n(\pi_0(\R))$. Denote this category by $GL_n(\R)$.
+}
+
+Less formal, since $\pi_0(\R)$ is usually just a rig and not a ring, this additional step just collects all matrices which are invertible
+up to connecting chains of morphisms.
+
+\lemma{\cite[Remark between Definition 2.4 and Definition 2.5]{richter2010involution}
+Matrix multiplication respects weak invertibility, that is $\cdot\colon M_n(\R)\times M_n(\R) \rightarrow M_n(\R)$ restricts to $GL_n(\R)$.
+\begin{proof}
+First note that, if $\R$ is small, then each of the defined matrix categories is small as well, hence intersections are defined.
+The preceding sequence of definitions then gives the equivalences
+$$\begin{aligned}
+A\in GL_n(\R)&\Leftrightarrow A\in M_n(\R) \wedge \lbrack A \rbrack \in GL_n(\pi_0(\R))
+\\ &\Leftrightarrow A\in M_n(\R) \wedge \lbrack A \rbrack \in M_n(\pi_0(\R)) \wedge \lbrack A \rbrack \in GL_n((-\pi_0(\R)\pi_0(\R)))\\
+ &\Leftrightarrow A\in M_n(\R) \wedge \lbrack A \rbrack \in GL_n((-\pi_0(\R)\pi_0(\R)))
+  \end{aligned}
+$$
+and both of these conditions are compatible with matrix multiplication.
+\end{proof}
+}
+
+\rem{
+The stabilisation of $GL_n(R)$ for a ring $R$ (cf. Definition \ref{stableGL}) generalises to this case by mimicking
+the stabilisation of linear groups as follows. Define on objects
+$$
+\begin{aligned}J_n\colon &Ob(GL_n(\R))\rightarrow Ob(GL_{n+1}(\R))\\
+&J_n(A):={\begin{pmatrix}
+         A & 0_n \\ 0_n^t & 1_\R
+        \end{pmatrix}}
+\end{aligned}$$
+(where $0_n^t$ denotes the horizontal zero $n$-tuple) and extend this on morphisms in the obvious fashion via
+$$
+J_n(f_{i,j}\colon A\rightarrow B)_{k,l}:= \begin{cases}
+                                           f_{k,l}\colon A_{k,l} \rightarrow B_{k,l}  & ~~~ \mathrm{for~~} 0\leq k,l \leq n \\
+					   id_{1_\R} &~~~ \mathrm{for~~} k=l=n+1\\
+					   id_{0_\R} &~~~ \mathrm{otherwise}
+                                          \end{cases}
+$$
+This defines a functor and hence defines in the usual fashion $GL(\R)$ as the colimit in small categories
+$GL(\R):=\mathrm{colim_\mathcal{N}}GL_n(\R)$, which still is a monoidal category.
+}
+
+\section{Bar Construction for Monoidal Categories}
+From \cite{baas2004two} I take the following bar construction for monoidal categories (no strictness assumed), so in this context for $GL(\R)$.
+\defn{\cite[Definition 2.5]{richter2010involution} Let $(\C,\cdot,1_\C,\alpha,\lambda,\rho)$ be a monoidal category (for $\alpha$ the associativity transformation, $\lambda, \rho$ the unit transformations).
+Let $B_q(\C)$ be the following category:
+\begin{itemize}
+ \item Its objects are given by triangular matrices of objects in $\C$, such that for each $0\leq i<j\leq q$ there is an object $A^{i,j}\in \C$, i.e.
+$$
+\begin{pmatrix}
+ A^{0,1} & A^{0,2} & \ldots & A^{0,q}\\
+         & A^{1,2} & \ldots & A^{1,q}\\
+         &         & \ddots & \vdots   \\
+         &         &        & A^{q-1,q}
+\end{pmatrix}.
+$$
+ \item Furthermore for each $0\leq i < j < k \leq q$ there is a (chosen) isomorphism
+$$\varphi^{i,j,k}\colon A^{i,j}\cdot A^{j,k}\rightarrow A^{i,k}$$
+subject to the coherence
+$$\xymatrix{
+(A^{i,j}A^{j,k})A^{k,l}\ar[rr]^{\alpha}\ar[d]^{\varphi^{i,j,k}\cdot id}&& A^{i,j}(A^{j,k}A^{k,l})\ar[d]^{id\cdot \varphi^{j,k,l}}\\
+A^{i,k}A^{k,l}\ar[r]^{\varphi^{i,k,l}} & A^{i,l} & A^{i,j}A^{j,l}.\ar[l]_{\varphi^{i,j,l}}
+}$$
+\item A morphism $f$ in $B_q(\C)$ is a set of morphisms $f^{i,j}\colon A^{i,j}\rightarrow B^{i,j}$ for each pair $(i,j)$ satisfying $0\leq i < j \leq q$, such that for all $0\leq i < j < k \leq q$ and $\psi_{i,j,k}$ the isomorphisms of $B$ the maps $f^{i,j}$ satisfy the following coherence
+$$f^{i,k}\varphi^{i,j,k}=\psi^{i,j,k}(f^{i,j}\cdot f^{j,k}).$$
+\end{itemize}
+}
+
+\ex{
+The isomorphisms $\varphi^{i,j,k}$ are a necessary part of the data because of the additional choices which are
+involved by a non-strict associativity. The $1$-simplices are the objects
+of $\C$, so no additional data. In $B_2\C$ there are typical simplices
+$$
+\begin{pmatrix}
+a & ab\\
+  & b
+\end{pmatrix},
+$$
+which are one specific instance of a chosen representative given the diagonal entries $a,b$.
+But for objects in $B_3\C$ and even fixed diagonal objects $a,b,c$ and binary products $ab, bc$, this triangle can only be built up as follows
+$$\begin{pmatrix}
+a & ab & ?\\
+  & b  & bc\\
+  &    & c
+\end{pmatrix},
+$$
+which is the first occasion, where in the top right there is a choice of a representative for the triple product involved. The first coming to mind might
+be $a(bc)$ and $(ab)c$ and both are isomorphic via $\alpha$, but there might be even more and the $\varphi^{i,j,k}$ fix the chosen isomorphisms on the way.\\
+}
+
+I will not prove the next lemma, but I want to exhibit the statement very clearly.
+
+\lemma{
+The categories $B_q(\C)$ form a simplicial category with the following face and degeneracy functors
+$$
+\begin{aligned}
+ d_i\colon& B_q(\C)\rightarrow B_{q-1}(\C) ~~ i=0,\ldots,q\\
+ &(d_i(A_{k,l}))_{m,n}=A_{\delta_i(m),\delta_i(n)}\\
+ s_i\colon& B_q(\C)\rightarrow B_{q+1}(\C) ~~~i=0,\ldots,q\\
+ &(s_i(A_{k,l}))_{m,n}=A_{\sigma_i(m),\sigma_i(n)},
+\end{aligned}
+$$
+where $\delta_i\colon \lbrack q-1 \rbrack \rightarrow \lbrack q \rbrack$ is the monotonic map that skips $i$ and $\sigma_i\colon \lbrack q+1 \rbrack \rightarrow \lbrack q \rbrack$
+is the monotonic map that hits $i$ (and only $i$) twice. Since degeneracies $s_i$ might be ``hitting twice'', I use the convention $A_{i,i}=1_\C$ for each $A$ and $i$.
+
+The isomorphisms for $d_i(A)$ are just the isomorphisms $\varphi^{\delta_i(j),\delta_i(k),\delta_i(l)}$, since $d_i$ does not change anything about strictness of $0\leq j<k<l\leq q$.
+By the convention to take $A^{i,i}=1_\C$ either $\lambda\colon 1\cdot c \rightarrow c$ or $\rho \colon c \cdot 1 \rightarrow c$ are natural choices for isomorphisms $\varphi$,
+according to the position of the unit in the degenerate simplex. This is coherent by the coherence of the left and right unit transformation given by $\C$ being a monoidal category.
+
+The extension of $d_i$ and $s_i$ to morphisms is just restricting a given $(f^{i,j})$ or inserting $f^{i,i}=id_{1_\C}$ at equal indices.
+\hfill $\Box$
+}
+
+For strict monoidal categories however one can formally mimic the bar construction given in definition \ref{topbarg} and get the following result:
+
+\thm{\cite[Prop 3.9]{baas2004two}\label{barstrict}
+The bar construction $B\C$ is equivalent to the strict bar construction $\lbrack n \rbrack \mapsto \C^n_s$ for any strictly
+monoidal rigidification $\C_s$ of $\C$.\phantom{blubbel}\hfill$\Box$
+}
+
+\rem{One could either directly use the bar construction given for monoidal categories
+or strictify the monoidal category first, i.e. replace the associativity, left and right unit transformation by identities
+in an organised fashion, and then apply the usual bar construction (definition \ref{topbarg}). This theorem implies that both approaches yield equivalent results.}
+
+\rem{
+In order to avoid confusion let me point out explicitly that there is a functor $U\colon \mathrm{CAT} \rightarrow Sets$ from the (1-)category of small categories to sets,
+which just sends each category to its set of objects and just forgets morphisms. This then extends to a forgetful functor $U\colon s\mathrm{CAT} \rightarrow sSets$ from
+simplicial categories to simplicial sets, which defines the geometrical realisation of $B_\bullet \C$ by setting $|B\C| := |UB\C|$.
+}
+
+\section{$K$-Theory of a Strict Bimonoidal Category}
+By the preceding section there already is a classifying space associated to the category of weakly invertible matrices over a bimonoidal category, but so
+far there is no obvious extension to the meaning of using a Plus-construction $|BGL(\R)|^+$. Fortunately the additional simplices do not affect the
+first homotopy group. The following lemma from Baas, Dundas and Rognes \cite{baas2004two} simplifies the proof of lemma \ref{nixneues}.
+
+\lemma{\cite[Proposition 5.3]{baas2004two} Let $B$ be a rig with additive Grothendieck group completion $A := Gr(B)$. Then the rig-homomorphism $B \rightarrow A$ induces a
+weak equivalence of classifying spaces $$|BGL(B)| \rightarrow |BGL(A)|,$$ where $GL(B)$ denotes weakly invertible matrices over a rig.
+\phantom{blubbel}\hfill$\Box$}
+
+The fundamental group of $BGL(\R)$ can hence be described explicitly by its associated ring $R$:
+
+\lemma{\label{nixneues} Let $\R$ be a bimonoidal category and $R:=(-\pi_0(\R))\pi_0(\R)$ its associated ring.
+
+(1) The natural projection
+$$ GL_n(\R) \rightarrow GL_n(R)$$
+from weakly invertible $\R$-matrices to the general linear group over $R$ induces a natural simplicial map of the (underlying set of the) bar construction
+of the monoidal category $GL_n(\R)$ to the ordinary bar construction of the group $GL_n(R)$
+$$p\colon B_\bullet(GL_n(\R)) \longrightarrow B_\bullet(GL_n(R))$$
+given by projecting to diagonal entries
+$$
+p\left(\begin{pmatrix}
+       A^{0,1} & A^{0,2} & \ldots & A^{0,q}\\
+               & A^{1,2} & \ldots & A^{1,q}\\
+               &         & \ddots & \vdots \\
+               &         &        & A^{q-1,q}
+       \end{pmatrix},(\varphi^{i,j,k})\right) := (\lbrack A^{0,1}\rbrack, \lbrack A^{1,2} \rbrack, \ldots, \lbrack A^{q-1,q} \rbrack)
+$$
+
+(2) Stabilisation of $GL_n(\R)$ and $GL_n(R)$ with regard to $n$ and geometrical realisation yield an isomorphism of fundamental groups
+$$p_* \colon \pi_1(|BGL(\R)|) \rightarrow \pi_1(|BGL(R)|) = GL(R).$$ In particular there is a natural inclusion of
+the elementary matrices over $R$ as a perfect normal subgroup of $\pi_1|BGL(\R)|$, i.e. $E(R) \hookrightarrow \pi_1(|BGL(\R)|)$.
+
+\begin{proof}
+(1) Since it is not an ordinary induced map between bar constructions of the same kind, I explicitly present the compatibility with face maps in
+the case $l=1,\ldots,q-1$. Note that for matrices in $B_q(GL_n(\R))$ the associated isomorphisms give the
+relation $\lbrack A^{i,j}\rbrack \lbrack A^{j,k} \rbrack = \lbrack A^{i,k} \rbrack$ in $\pi_0(\R)$ for indices $i<j<k$, which implies
+$$
+\begin{aligned}
+ p(((d_l(A))^{i,j})_{0\leq i<j\leq q-1}) &= p(((A)^{d_l(i),d_l(j)})_{0\leq i<j \leq q-1})\\
+&=(\lbrack A^{0,1}\rbrack,\ldots, \lbrack A^{l-1,l+1} \rbrack, \ldots,\lbrack A^{q-1,q}\rbrack)\\
+&=(\lbrack A^{0,1}\rbrack,\ldots, \lbrack A^{l-1,l} \rbrack \lbrack A^{l,l+1} \rbrack, \ldots, \lbrack A^{q-1,q} \rbrack )\\
+&=d_l(\lbrack A^{0,1}\rbrack,\ldots, \lbrack A^{q-1,q}\rbrack)\\
+&=(d_l\circ p)(A).
+\end{aligned}
+$$
+The other cases are also readily derived from the existence of those morphisms.
+
+(2) By the preceding lemma inspect
+$$p\colon |B_\bullet(GL(\R))| \longrightarrow |B_\bullet(GL(\pi_0(\R)))|$$
+Without loss of generality assume that a given loop $\bar\gamma \colon \S^{1} \rightarrow |BGL(\pi_0(\R))|$ is a cellular map,
+such that $\bar\gamma$ passes through finitely many $1$-cells, since $\S^1$ is compact. More precisely, denote
+the unique $0$-cell of $|BGL(\pi_0(\R))|$ by $*$, then the image of the loop except for $*$, i.e. $\bar\gamma(\S^1)\setminus *$,
+can be decomposed into a sequence of finitely many $1$-cells. In particular for $\theta \in \S^1$ define
+$\lbrack A^{\bar\gamma(\theta)}\rbrack$ as either the unique cell of $\bar\gamma(\theta)$ or as $*$.
+It is clear that between two occurrences of the base-point $\lbrack A^{\bar\gamma(\theta)}\rbrack$ is constant.
+Choose a sequence of representatives $(A^{\gamma(\theta)})$ with $A^{\gamma(\theta)}=*\in BGL(\R)$, if $\bar\gamma(\theta)=* \in |BGL(\pi_0(\R))|$
+and $p(A^{\gamma(\theta)}) = \lbrack A^{\gamma(\theta)}\rbrack$, which are chosen to be locally constant as well.
+This gives a map
+$$\gamma\colon \S^1 \rightarrow |BGL(\R)| $$
+by setting $\gamma(\theta):=\lbrack A^{\gamma(\theta)} , (\bar\gamma)_2(\theta)\rbrack,$
+where $(\bar\gamma)_2$ denotes the simplex coordinate in the image of $\Delta^1$ modulo identification.
+This is a well-defined and hence a continuous map $\gamma\colon \S^1 \rightarrow |BGL(\R)|,$ which satisfies $p\circ \gamma = \bar\gamma$ per construction.
+Thus the induced map $p_* \colon \pi_1(|BGL(\R)|) \rightarrow \pi_1(|BGL(\pi_0(R))|)$ is surjective.
+
+By lifting homotopies in the same fashion with the useful choice
+$$p\begin{pmatrix}
+A_1 & A_1A_2\\ & A_2
+\end{pmatrix}=(\lbrack A_1 \rbrack, \lbrack A_2 \rbrack),$$
+the induced map of the projection is injective on $\pi_1$ as well. Therefore on fundamental groups there is an isomorphism
+$$p_*\colon \pi_1(|BGL(\R)|) \rightarrow \pi_1(|BGL(R)|) = GL(R).$$
+\end{proof}}
+
+Another strategy to prove the preceding lemma is to apply the result \ref{barstrict} and try to sufficiently understand the strictified monoidal category $GL(\R)_s$. Since I only need
+this result in degree $1$, lemma \ref{nixneues} allows to associate a $K$-theory space to a bimonoidal category:
+
+\defn{
+Let $\R$ be a bimonoidal category and $R=(-\pi_0(\R))\pi_0(\R)$ its associated ring. By the preceding lemmas there is a natural inclusion
+$E(R)\rightarrow \pi_1|BGL(\R)|$ and hence the plus-construction can be used with respect to the perfect normal subgroup $E(R)$ to define
+$$K(\R)=|BGL(\R)|^+$$
+and thus the $K$-groups by
+$$K_n(\R):=\pi_n(K(\R)) ~~~ (n\geq 1).$$
+}
+
+\rem{
+Again recall that I do not define $K_0$ here, since $K(\R)$ is evidently connected.
+}
+
+\section{Bimonoidal Categories with Involution}
+I will not go through all the details of the construction of an induced involution for a category with involution, since it is very explicitly given in Birgit Richter's paper
+\cite[Chapter 4]{richter2010involution}. But I will state the relevant definitions to give the comparison theorem from \cite[Proposition 4.12]{richter2010involution}.
+
+\defn{
+An anti-involution in a strict bimonoidal category $\R$ consists of a functor $\zeta\colon \R \rightarrow \R$ with $\zeta\circ\zeta= id$ together with
+natural isomorphisms $$\mu\colon \zeta(A\otimes B) \rightarrow \zeta(B)\otimes \zeta(A)$$ for all $A,B\in \R$. These have to satisfy the following conditions
+The functor $\zeta$ is strictly symmetric monoidal with respect to $(\R,\oplus, O_\R, c_\oplus)$, fixes the unit by $\zeta(1_\R)=1_\R$ and
+ $\mu_{1_\R,A}=id_A=\mu_{A,1_{\R}}$ and satisfies coherences spelled out in \cite[Definition 3.1]{richter2010involution}. Denote a
+bimonoidal category with involution by $(\R,\zeta,\mu)$.}
+
+\rem{Recall that the definition \ref{bimoncat} of strict bimonoidal categories requires one of the distributivity morphisms to be strict while the other distributivity is not.
+This hinders a generalisation of the interpretation of anti-homomorphisms as morphisms into opposite structures. Opposing
+the multiplication to a category $\R^{op_{\otimes}}$ does not give a strict bimonoidal category in the sense of definition \ref{bimoncat}.
+Relaxing each distributivity to be just isomorphisms helps in this specific spot, but I will not elaborate on this.}
+
+I define the induced involution with a certain ignorance to all the technicalities involved in \cite{richter2010involution}.
+
+\defn{\label{indinvbimon}
+For $\R$ a bimonoidal category with involution $\zeta\colon \R \rightarrow \R$ let
+$$\zeta_*\colon |BGL(\R)| \rightarrow |BGL(\R)|$$
+be given by
+$$
+\zeta_* \left[ {\begin{pmatrix}
+                         A^{0,1} &\ldots & A^{0,q}\\
+                                 &\ddots & \vdots \\
+                                 &       & A^{q-1,q}
+               \end{pmatrix}},                          (t_0,\ldots,t_q) \right]$$
+$$~~~~~~~~~~~~~~~~~  :=\left[  \begin{pmatrix}
+														        	         (A^{q-1,q})^t &\ldots & \zeta(A^{0,q})^t\\
+														            	                   &\ddots & \vdots \\
+														                	               &       & \zeta(A^{0,1})^t
+												                   	     \end{pmatrix} , (t_q,\ldots,t_0)  \right]
+$$
+It is quite clear that the natural inclusion of elementary matrices over $R$
+is respected by this involution, so there is an induced map on $K$-spaces
+$$\zeta_*\colon K(\R)=|BGL(\R)|^+ \rightarrow |BGL(\R)|^+.$$
+Call this the involution on $K$-theory induced by $\zeta\colon \R \rightarrow \R$.
+}
+
+\rem{
+This means the involution is induced by transposing each matrix (beware that transposition is a functor now), applying the involution to each matrix
+componentwise and reversing the triangle (of matrices) along the secondary diagonal.
+Of course the involved isomorphisms are to be changed accordingly as well.
+}
+
+In order to compare the involution on the linear group of a ring with involution with the one on a bimonoidal category with involution,
+one obviously needs to replace the inverse map. This is provided by the following lemma from \cite{BF} (in the proof of
+Proposition 4.5), which compares the canonical homeomorphism $|BG| \rightarrow |B(G^{op})|$ for a group $G$ given by the inverse map
+to another one, which generalises to monoids easily.
+
+\lemma{\cite[Proof of Proposition 4.5]{BF} There is a homotopy between the homeomorphism\label{homotopyinvrev}
+$$\kappa \colon  |BG| \rightarrow |B(G^{op})|$$ given by $\kappa(\lbrack (x_1,\ldots,x_n),(t_0,\ldots,t_n) \rbrack) := \lbrack (x_n,\ldots,x_1),(t_n,\ldots,t_0) \rbrack$
+and the canonical homeomorphism $|B\iota|\colon |BG| \rightarrow |BG^{op}|$ given by the induced map of the inverse map.
+
+\begin{proof}(Sketch)
+The homotopy $H\colon |BG|\times I \rightarrow |BG^{op}|$ is given by
+$$\begin{aligned}
+  H(\lbrack &(g_1,\ldots,g_n),(t_0,\ldots,t_n) \rbrack,s) \\&:= \lbrack (g_n,\ldots,g_1,{g_1}^{-1},\ldots,{g_n}^{-1}),
+  s(t_n,\ldots,t_0,0_n) + (1-s)(0_n,t_0,\ldots,t_n) \rbrack
+  \end{aligned}
+$$
+where $0_n$ denotes a zero tuple with $n$ positions. It is tedious to check but true that this is well-defined and a homotopy between the given maps.
+\end{proof}
+}
+
+The following results compare the induced involutions on $K$-theory of strict bimonoidal categories and the $K$-theory of rings.
+Of course the comparison should be induced by the natural projection $p\colon GL_n(\R)\rightarrow GL_n(R)$. The induced involution defined in \ref{indinvbimon} extends
+the earlier definition for rings given in \ref{indinvK}, if the projection induces a map on $K$-groups respecting the involution.
+
+\thm{\cite[Corollary 4.11]{richter2010involution} \label{projecting}
+For $(\R,\zeta,\mu)$ a bimonoidal category with involution let $R=(-\pi_0(\R))\pi_0(\R)$ be its associated ring. Then $R$ is a ring with anti-involution
+and the induced map of projecting to components in $\pi_0$  $$p\colon |BGL(\R)| \rightarrow |BGL(R)|$$ induces a map of
+$K$-groups $$K_i(\R)\rightarrow K_i(R)$$
+respecting the two given induced involutions. More precisely, the diagram $$\xymatrix{
+|BGL(\R)|\ar[r]^p \ar[d]^{\zeta_*}&|BGL(R)|\ar[d]^{\zeta_*}\\
+|BGL(\R)|\ar[r]^p&|BGL(R)|\\
+}$$
+commutes.
+
+\begin{proof}
+Study the following relations
+$$\begin{aligned}&(p \zeta_*)\left\lbrack \begin{pmatrix}
+                       A^{0,1} &\ldots & A^{0,q}\\
+                               &\ddots & \vdots \\
+                               &       & A^{q-1,q}
+                      \end{pmatrix},(t_0,\ldots,t_q)\right\rbrack\\
+=&p\left\lbrack \begin{pmatrix}
+                       \zeta(A^{q-1,q})^t &\ldots & \zeta(A^{0,q})^t\\
+                               &\ddots & \vdots \\
+                               &       & \zeta(A^{0,1})^t
+                      \end{pmatrix},(t_q,\ldots,t_0)\right\rbrack\\
+=&\lbrack (\lbrack \zeta(A^{q-1,q})^t\rbrack, \ldots, \lbrack \zeta(A^{0,1})^t \rbrack),(t_q,\ldots, t_0)\rbrack\\
+\end{aligned}$$
+But $R$ is an ordinary ring, so the fact $\kappa \simeq |B\iota|$ by \ref{homotopyinvrev} gives the following equality on homotopy groups
+$$
+\begin{aligned}
+p_* \circ \zeta_* &= \kappa_* \circ |BT|_* \circ |B\zeta|_* \\&= |B\iota| \circ |BT|_* \circ |B\zeta|_*\\ &= |B(\iota\circ T \circ \zeta)|_*,
+\end{aligned}$$
+which is the induced involution defined for a ring with involution.
+\end{proof}
+}
+
+In particular, the associated bimonoidal category to a ring with involution yields the same $K$-theory.
+
+\cor{\cite[Proposition 4.12]{richter2010involution}
+Let $R$ be any ring with involution and $\R_R$ its associated bimonoidal category (cf. Example \ref{ringbiperm}), then there is an isomorphism of
+$K$-groups compatible with the induced involutions. The isomorphism is induced by the projection $p\colon Ob(\R_R) \rightarrow R$ and gives
+$$K_*(\R_R)\cong K_*(R).$$
+\begin{proof}
+Inspect the bar construction of matrices over $\R_R$ first. For the bar construction over the discrete category $\R_R$ associated to the ring $R$
+the existence of a morphism $\varphi^{i,j,k}\colon A^{i,j}A^{j,k}\rightarrow A^{i,k}$ is equivalent to the
+statement $A^{i,j}A^{j,k} = A^{i,k}$. So the isomorphisms are redundant information, thus each simplex has the following form
+$$
+\begin{aligned}
+\begin{pmatrix}
+  A^{0,1} & A^{0,1}A^{1,2} & \ldots & A^{0,1}A^{1,2}\ldots A^{q-1,q}\\
+          & A^{1,2} &\ldots  & A^{1,2}\ldots A^{q-1,q}\\
+          &         &\ddots  & \vdots\\
+          &         &        & A^{q-1,q}
+\end{pmatrix}.
+\end{aligned}
+$$
+This implies that each $q$-simplex is uniquely determined by its diagonal. Furthermore the equality $R = \pi_0(\R_R) = Gr(\pi_0(\R_R))$
+implies that restricting the matrix components via $p$ is just a plain identity.
+
+This extends to an isomorphism of simplicial sets $Ob(B_\bullet(GL(\R_R))) \cong B_\bullet(GL(R))$ and theorem \ref{projecting}
+implies that restricting the matrix entries induces a morphism of $K$-groups, which is compatible with the induced involutions,
+thus the claim follows.
+\end{proof}
+}
+
+Theorem \ref{projecting} of course also implies that one can detect non-trivial involutions on bimonoidal categories $\R$, which are not discrete.
+First reduce the category $\R$ to the rig $\pi_0(\R)$, then group complete to $R=(-\pi_0(\R))\pi_0(\R)$. This is a ring and hence might give a
+starting point for tools developed in algebraic $K$-theory of rings (as for example the trace map (cf.  \ref{tracing})).
+
+\rem{An explicit example of that may be found in the proof of Proposition 8.1 in \cite{richter2010involution}, where Richter proves that the involution on
+algebraic $K$-theory of complex topological $K$-theory $ku$ is non-trivial. In ``Two-Vector Bundles and Forms of Elliptic Cohomology'' \cite{baas2004two} the
+authors construct a bimonoidal category  $\mathcal{V}$, which satisfies $K(ku)\simeq K(\mathcal{V})$ by the results of
+``Ring Completion of Rig Categories''\cite{baas2009ring} and ``Stable Bundles over Rig Categories''\cite{baas909stable}. This interpretation allows
+to give a map $K(ku) \rightarrow K^f(\Z)$ (where $K^f(\Z)$ is just a minor modification of $K(\Z)$) and this map is induced by a map of bimonoidal
+categories $\mathcal{V}\rightarrow \mathcal{\R_\Z}$.
+
+The $K$-theory of $\Z$ is, although or maybe because it is still not completely known, intensively studied. In particular there is a result of Farrell and Hsiang (Lemma 2.4
+in \cite{farrell1rational}) that the involution on $K_*(\Z)$ is non-trivial, where the involution is induced by the identity. This result now implies that the involution
+on $K(ku)$ is non-trivial.
+
+Indeed the actual Proposition 8.1 in \cite{richter2010involution} also states the non-triviality of the involution on $K(ko)$ for $ko$ the spectrum of real topological
+$K$-theory and the non-triviality of the involution on Waldhausen's $A$-Theory of the double classifying space of an abelian group $A(BBG)$. The proof proceeds
+by an analogous strategy to identify $K(ko)$ and $A(BBG)$ as homotopy-equivalent to $K$-theory spaces of bipermutative categories, which also have a non-trivial
+map to $\R_\Z$.
+
+Of course a detailed investigation of all those structures would require knowledge of spectra, various identifications of $K$-theory and other techniques,
+which are beyond the scope of this diploma thesis.}

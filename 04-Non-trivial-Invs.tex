@@ -1,0 +1,226 @@
+\chapter{Non-trivial Involutions}
+In this section I want to construct some examples of rings with non-trivial involutions and study their induced involution on $K_1$. This
+will provide some non-trivial examples of induced involutions on $K$-theory. In particular it will provide examples for induced involution on
+$K$-theory of simplicial rings as defined in the paper of Burghelea and Fiedorowicz \cite{BF} and for involutions associated to a
+bipermutative category with involution as defined by Richter \cite{richter2010involution}.
+
+Obviously group rings (with commutative coefficients) provide a large class of examples, but in order to have a good understanding of how the
+units contribute to $K_1$, I will restrict to the commutative case.
+
+\section{Involution on Group Rings}
+For $K_1$ of a commutative ring $R$ it is quite natural to investigate the determinant (cf. Proposition \ref{det})
+$$det \colon K_1(R) \rightarrow R^{\times}$$
+and this is split by the inclusion $R^\times = GL_1(R) \rightarrow GL(R)$. This implies that for a group ring $R\lbrack G\rbrack$ with commutative
+coefficients $R$ on an abelian group $G$, there is the following natural inclusion of groups
+$$R^\times \times G \rightarrow (R\lbrack G \rbrack)^\times$$ where it is quite common to call $R^\times \times G$ the trivial units
+\label{units} in a group ring. But be warned that it is still an open problem to determine, under which restrictions all units of a group ring are just
+the trivial ones. In fact the unit conjecture according to a survey article by L\"uck and Reich \cite{khandbookarXiv} very modestly
+reads as follows:
+
+ ``Let $R$ be an integral domain and $G$ be a torsion free group. Then every unit in $R\lbrack G \rbrack$ is trivial,
+i.e. of the form $rg$ for some unit $r\in R^\times$ and $g\in G$.''
+
+Nonetheless group rings are a useful class of examples of rings with involutions by the fact that they carry a natural
+and in a manner universal involution.
+
+\prop{For $R$ a commutative ring and $G$ any group there is the following bijection
+$$\begin{aligned}
+    \mathit{Hom}(R\lbrack G\rbrack,R\lbrack G\rbrack) &\rightarrow \mathit{Hom}(R\lbrack G\rbrack,(R\lbrack G\rbrack)^{op})\\
+                         \varphi &\mapsto \iota \circ \varphi
+  \end{aligned}
+$$
+where $\iota$ denotes the inverse map on $G$.
+
+\begin{proof}
+There is mainly one point that establishes this bijection and that is the identification
+$$(R\lbrack G \rbrack)^{op} = R\lbrack G^{op}\rbrack$$
+which in this simplicity only works with commutative coefficients, otherwise one might need an involution on $R$ itself.
+So the inverse map gives a map $R\lbrack G\rbrack \rightarrow R \lbrack G^{op} \rbrack \rightarrow (R \lbrack G \rbrack)^{op}$, which
+can be understood as a canonical involution and hence provides the bijection as claimed.
+\end{proof}\label{canInv}}
+
+So in this manner for $R\lbrack G\rbrack$ a commutative ring involutions on $R\lbrack G\rbrack$ are given by self-inverse homomorphisms
+on $R\lbrack G\rbrack$. Thus investigate involutions induced by compositions of self-inverse homomorphisms with the inverse map in the special
+case of commutative group rings.
+
+\prop{
+Let $R$ be a commutative ring and $G$ an abelian group. For a self-inverse homomorphism $\varphi \colon G\rightarrow G$ and the inverse map
+$\iota \colon G \rightarrow G^{op}$ the induced involution $\varphi\circ\iota$ on $R\lbrack G \rbrack$ yields a non-trivial involution on $K_1(R\lbrack G\rbrack)$.
+
+\begin{proof}
+Proposition \ref{detinv} gives that the determinant transforms an involution by the formula $\det\circ\tau_*=\iota\circ\tau\circ\det$ and by \ref{units} the units are a natural subgroup of $K_1$.
+This implies (for $r\in R^\times$ and $g\in G$)
+$$
+\begin{aligned}
+(\det\circ \tau_*)(rg) &= (\iota_{R^\times} \circ\tau)(rg)\\ &= (\iota_{R^\times} \circ \varphi \circ \iota_G)(rg)
+&= \iota_{R^\times}(r\varphi(g^{-1})) = r^{-1}\varphi(g).
+\end{aligned}
+$$
+Therefore the induced involution is non-trivial on the subgroup of trivial units of $K_1$.
+\end{proof}}
+
+In particular note that the units in the coefficient ring are always inverted, independent of the chosen homomorphism.
+
+\section{Involutions on Laurent Polynomials}\label{invR1}
+
+The formula before was quite explicit, but restricting gives an even more explicit class of examples.
+
+\subsection{Units in Laurent Polynomials}
+
+\prop{
+For $R$ a commutative ring there is an inclusion
+$$\varphi \colon R^{\times}\oplus (\Z,+)  \rightarrow R\lbrack t,t^{-1}\rbrack^\times$$
+given by $\varphi(r,k):=rt^k$. \hfill $\Box$
+}
+
+But if $R$ is commutative, then $R\lbrack t, t^{-1}\rbrack$ is commutative as well and so induction gives the following result:
+
+\cor{\label{commUnits}
+For $R$ a commutative ring there is a natural inclusion
+$$\varphi \colon R^\times \oplus (\Z^k,+) = R^\times \oplus \langle e_1,\ldots,e_k \rangle_\Z \rightarrow (R\lbrack {t_1}^\pm,\ldots,{t_k}^\pm\rbrack)^\times$$
+with $\varphi(r,m_1e_1,\ldots,m_ke_k):=rt_1^{m_1}\ldots t_k^{m_k}$. \hfill $\Box$
+}
+
+So for the first $K$-group of such a ring the units include into the first summand of the well-known splitting
+$$K_1(R\lbrack t_1^\pm,\ldots,t_k^\pm \rbrack) \cong (R\lbrack t_1^\pm,\ldots,t_k^\pm \rbrack)^\times \oplus SK_1(R\lbrack t_1^\pm,\ldots,t_k^\pm\rbrack) \supseteq R^\times \oplus (\Z^k,+),$$
+where $SK_1$ is the usual quotient
+$$SL(R\lbrack t_1^\pm,\ldots,t_k^\pm\rbrack)/E(R\lbrack t_1^\pm,\ldots,t_k^\pm\rbrack).$$
+
+The preceding inclusions of trivial units even extend to equalities, if the coefficient ring $R$ is an integral domain. To that end
+study the following results.
+
+\lemma{
+For $R\lbrack t \rbrack$ the polynomial ring with coefficients in an integral domain $R$ the indeterminate $t$ is a prime element.
+\begin{proof}
+Suppose $t$ is a divisor of a product of polynomials $pq$. This is equivalent to the assumption that $pq$ has no constant term, which evidently means that at least
+one of the factors has no constant term as well and is therefore divisible by $t$.
+\end{proof}}
+
+This result can be extended to study divisors of powers of $t$:
+
+\lemma{
+Powers of the indeterminate in a polynomial ring $R\lbrack t\rbrack$ with coefficients in an integral domain $R$ have no further divisors than powers of lower degree.
+\begin{proof}
+This is a proof by induction. For $t^0=1$ it is evident that only polynomials of degree zero, i.e. constant polynomials, can divide $t^0$. But if they divide $1$ they are units and hence
+trivial divisors. Let $t^n = pq$, then by the preceding proposition $t$ divides either $p$ or $q$. Without loss of generality assume $t|p$, then there is a polynomial $\bar p$ satisfying the
+equality $\bar p t = p$, which implies $t^{n-1} = \bar p q$, which by the induction hypothesis yields $\bar p = rt^i$ and $q=r^{-1}t^{n-1-i}$. As a consequence the factors of $t^n$ are
+$p= \bar p t = r t^{i+1}$ and $q = r^{-1}t^{n-1-i}$, hence follows the claim.
+\end{proof}}
+
+These results extend furthermore to give all units in Laurent polynomials for coefficients in an integral domain:
+
+\thm{\label{units in intdom}
+The units in a Laurent polynomial ring with coefficients in an integral domain are trivial, i.e. if $p\in R\lbrack t^{\pm 1}\rbrack$ is a unit, then
+$p$ is of the form $p = rt^n$ with $r\in R^\times$ and $n\in \Z$.
+\begin{proof}
+Let $p,q\in R\lbrack t^{\pm 1} \rbrack$ satisfy the equality $pq = 1$. Write both in the following form
+$$p = t^{-k}\bar p \mathrm{~~~and~~~} q = t^{-l}\bar q ~~~ \mathrm{for~~} k,l\in \N.$$
+Then this implies
+$$1 = pq = t^{-(k+l)}\bar p \bar q,$$
+which is equivalent to the equality
+$$t^{k+l}=\bar p \bar q.$$
+But since this holds in the ordinary polynomials, the preceding lemma gives
+$$\bar p = rt^{i} \mathrm{~~~and~~~} q= rt^{k+l-i}$$
+and therefore the initially given Laurent polynomials are of the form
+$$p = t^{-k}\bar p = rt^{i-k}\mathrm{~~~and~~~}q = t^{-l}\bar q = rt^{k-i},$$
+which proves the claim.
+\end{proof}
+}
+
+With the induction $R\lbrack t_1^\pm,\ldots,t_k^\pm\rbrack = R\lbrack t_1^\pm,\ldots, t_{k-1}^\pm \rbrack \lbrack t_k^\pm \rbrack$ this gives the following corollary:
+\prop{
+For $R$ an integral domain the units in Laurent polynomials of finitely many variables $R\lbrack t_1^\pm,\ldots,t_k^\pm \rbrack$ are just the trivial ones
+$$(R\lbrack t_1^\pm, \ldots, t_k^\pm \rbrack )^\times \cong R^\times \oplus \Z^k.$$
+\hfill$\Box$
+}
+
+\subsection{Involutions on $R\lbrack t_1^\pm,\ldots,t_k^\pm\rbrack$}
+For simplicity I will restrict to the case of involutions, which are degree-preserving in the following manner:
+
+\defn{
+For $p=\sum\limits_{i\in \Z} a_it^i\in R\lbrack t^\pm \rbrack$ define the degree $\deg p$ to be the following
+$$\deg p:=\max\{|i| ~~|~~ a_i\neq 0 \}.$$
+}
+
+This can be extended to Laurent polynomials in finitely many variables. For $I=(i_1,\ldots, i_k) \in \Z^k$ set $t^I:=t_1^{i_1}\cdot\ldots\cdot t_k^{i_k}$.
+\defn{
+For $p=\sum\limits_{I\in\Z^k} a_It^I \in R\lbrack t_1^\pm,\ldots, t_k^\pm \rbrack$  define the degree $\deg p$ to be
+$$\deg p := \max\left\{\left.\sum\limits_{j=1}^k|i_j| ~~\right|~~a_I\neq 0\right\}.$$
+}
+
+It is quite natural to expect involutions to preserve this degree and to be the identity on coefficients. In this case the involutions can be completely described as follows:
+
+\prop{\label{netteInvolutionen}
+For $R$ an integral domain a degree-preserving involution $$\varphi\colon R\lbrack t_1^\pm,\ldots,t_k^\pm\rbrack \rightarrow R\lbrack t_1^\pm,\ldots,t_k^\pm\rbrack$$ with $\varphi|_R = id_R$ determines and is determined by the following data:
+\begin{itemize}
+ \item a permutation $f\colon \{1,\ldots,n\} \rightarrow \{1,\ldots,n\},$
+ \item a choice of signs $s\colon \{1,\ldots,n\} \rightarrow \{-1,+1\},$
+ \item a choice of ring units $r_{\bullet}\colon \{1,\ldots,n\} \rightarrow R^\times,$
+\end{itemize}
+which are subject to the following conditions:
+\begin{itemize}
+ \item The permutation is its own inverse $f^2(i)=i ~~\forall i\in\{1,\ldots,n\}.$
+ \item Transposed elements carry the same sign $s(i) = s(f(i))~~\forall i\in\{1,\ldots,n\}.$
+ \item Transposed elements carry inverse units $r_{f(i)} = r_i^{-1}~~\forall i\in\{1,\ldots,n\}.$
+\end{itemize}
+\begin{proof}
+Let $\varphi$ be an involution, which is the identity on coefficients and degree-preserving, then on generators $\varphi$ is of the form
+$$\varphi(t_i)=r_it^{s(i)}_{f(i)}.$$
+The condition $\varphi^2 = 1$ then reads as follows
+$$t_i = \varphi^2(t_i) = \varphi(r_it^{s(i)}_f(i)) = r_ir_{f(i)}t^{s(f(i))f(i)}_{f^2(i)}.$$
+This gives the following restrictions
+$$\begin{aligned}
+     f^2(i) = i,\\
+     s(i)s(f(i)) = 1 & \Leftrightarrow &s(i)=s(f(i)),\\
+     r_ir_{f(i)}=1 & \Leftrightarrow & r_i = r_{f(i)}^{-1}.
+ \end{aligned}$$
+Furthermore it is  clear that maps $f,s,r_{\bullet}$ satisfying these conditions yield degree-preserving involutions by the formula $\varphi(t_i)=r_it^{s(i)}_{f(i)}.$
+\end{proof}
+}
+
+If the group of units of $R$ is finite, then this gives the following corollary:
+\cor{
+For $R$ an integral domain with finitely many units, i.e. $|R^\times|<\infty$, there are only finitely many involutions on $R\lbrack t_1^\pm,\ldots,t_k^\pm\rbrack$, which are degree-preserving and trivial on coefficients.
+\begin{proof}
+According to the preceding proposition each involution, which is trivial on coefficients and degree-preserving, is uniquely determined by three maps in $\Sigma_n$, \\$Set(\{1,\ldots,n\},\{-1,+1\})$ and $Set(\{1,\ldots,n\},R^\times)$.
+The first two sets are finite and the last is finite by the assumption that there are just finitely many units. Therefore there are only finitely many involutions of the given type.
+\end{proof}
+}
+
+\ex{
+One sees that the group of arbitrary involutions on Laurent polynomials with at least two variables cannot be finite by the following observation.
+For $R$ a commutative ring consider the maps $\varphi\colon R\lbrack t_1^\pm,t_2^\pm \rbrack$ given by
+$$\varphi(t_1) = t_1t_2^k \mathrm{~~and~~} \varphi(t_2) = t_2^{-1}.$$
+This map is an involution for each $k\in \Z$, since $\varphi^2(t_1) = \varphi(t_1t_2^k) = t_1t_2^kt_2^{-k} = t_1$. Therefore the group of involutions cannot be finite and since the group of involutions is a $\Z/2\Z$-vector space it cannot even be finitely
+generated.
+}
+
+Of course the main interest is again, if these involutions yield non-trivial involutions on $K$-theory. Indeed they all do:
+\thm{
+Let $R$ be an integral domain (with at least one non-trivial unit) and $\varphi$ a degree-preserving involution $\varphi\colon R\lbrack t_1^\pm,\ldots,t_k^\pm\rbrack \rightarrow R\lbrack t_1^\pm,\ldots,t_k^\pm\rbrack$ with $\varphi|_R = id_R$. Then
+$\varphi$ induces a non-trivial involution on the units of $R\lbrack t_1^\pm,\ldots,t_k^\pm\rbrack$ and therefore on $K_1(R\lbrack t_1^\pm,\ldots,t_k^\pm\rbrack)$.
+\begin{proof}
+Since by theorem \ref{units in intdom} the units are completely the determined as $R^\times \oplus \Z^k$ and by proposition \ref{netteInvolutionen} an involution can be described by a self-inverse permutation $f\colon \{1,\ldots,n\} \rightarrow \{1,...,n\}$
+a choice of signs $s\colon \{1,\ldots,n\} \rightarrow \{-1,+1\}$ and a choice of units $r_\bullet\colon \{1,\ldots,n\} \rightarrow R^\times$, calculate the induced involution on the units $R^\times \oplus \Z^k$.
+
+By proposition \ref{invonunits} an involution induces the following map on units:
+\begin{itemize}
+ \item for $u\in R^\times$ this is $$\varphi_*(u) = (\iota \circ \varphi)(u)=\iota(u) = u^{-1},$$
+ \item for $t_i$ a generator of a $\Z$-factor $$\varphi_*(t_i) = (\iota\circ \varphi)(t_i) = \iota(r_i t_{f(i)}^{s(i)}) = (r_i)^{-1}t_{f(i)}^{s(i)} = r_{f(i)}t_{f(i)}^{s(i)}.$$
+\end{itemize}
+In particular the induced involution is non-trivial for every involution $\varphi$, since it is non-trivial on $R^\times$.
+\end{proof}
+}
+
+The induced involution of course remains non-trivial in the case of just commutative coefficients, which are not an integral domain. But it is neither clear, whether there are additional units in that case and hence, whether there are additional
+involutions in that case, since $\varphi(t_i)\in (R\lbrack t_1^\pm,\ldots,t_k^\pm\rbrack)^\times$ is not that useful to restrict the image of $t_i$. Nonetheless the non-triviality statement remains true in the following form:
+\prop{
+For $R$ a commutative ring (with at least one non-trivial unit) and $\varphi\colon R\lbrack t_1^\pm,\ldots,t_k^\pm\rbrack \rightarrow R\lbrack t_1^\pm,\ldots,t_k^\pm\rbrack$
+an involution given by maps $f\colon \{1,\ldots,n\}\rightarrow \{1,\ldots,n\}$, $s\colon \{1,\ldots,n\}\rightarrow \{-1,+1\}$ and
+$r_\bullet\colon \{1,\ldots,n\} \rightarrow R^\times$ as described in theorem \ref{netteInvolutionen}, the induced involution is non-trivial on trivial units and hence non-trivial on $K_1.$ \hfill $\Box$
+}
+
+Thus each commutative ring yields a family of rings, which have non-trivial involutions on their $K$-theory.
+
+Of course it would be nicer, if I could present (non-discrete) categories, which projected to this class of
+examples, but there seems to be no obvious candidate for a category associated to a group in the same manner as a group-ring.

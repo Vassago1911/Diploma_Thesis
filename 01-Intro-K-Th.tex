@@ -1,0 +1,267 @@
+\chapter{Introduction to $K$-Theory of Rings}
+In order to investigate $K$-theory of rings with involution I first want to give a solid foundation of
+$K$-theory of general rings. My approach will diverge drastically from the historical development in an effort
+to homogenise the appearance of $K$-theory throughout this diploma thesis.
+
+But in order to do the actual history justice, let me give some remarks on the history of (algebraic) $K$-theory. The $K$ in the designation $K$-theory is
+reminiscent of Grothendieck's approach to the Riemann-Roch Theorem in which he studied coherent sheaves over an algebraic variety and looked
+at classes - which is ``Klassen'' in German - of those sheaves modulo exact sequences in 1957. This approach has been published by Borel and Serre
+in ``Le th\'eor\`eme de Riemann-Roch'' \cite{borelserre1958} (1958). This first group is what is nowadays called $K_0$.
+
+About seven years later, Bass provided a definition of the group he called $K_1(A)$ for $A$ a ring and provided an exact sequence
+$$K_1(A,\mathfrak{q})\rightarrow K_1(A) \rightarrow K_1(A/\mathfrak{q}) \rightarrow K_0(A,\mathfrak{q})\rightarrow K_0(A)\rightarrow K_0(\mathfrak{q})$$
+in the paper ``$K$-Theory and Stable Algebras'' \cite{bass1964k} (1964). Since this exact sequence was built upon to define higher $K$-theory,
+the name $K_1$ for this group is still the common one.
+
+The next group $K_2$ was defined by Milnor in 1968 according to Bass' ``$K_2$ and symbols'' \cite{bass1969k} and again had an exact sequence connecting
+it to $K_1$, along with a pairing $$K_1(A)\otimes K_1(A) \rightarrow K_2(A)$$ which is bilinear and antisymmetric, thus looked like a segment of a graded ring.
+Since the exact sequence, this pairing and further relations look far too natural to be a coincidence, one was looking for a general sequence of $K$-groups $K_n(R)$,
+which could be associated to a ring and which would yield a more structural explanation of the known results.
+
+This was given by Milnor in ``Algebraic $K$-Theory and Quadratic Forms'' \cite{milnor1970algebraick}, but Milnor himself described
+his definition as ``purely ad hoc'' (in \cite{milnor1970algebraick} as well). Furthermore Milnor's extension is restricted to be $K$-theory of fields, otherwise it would
+not agree with the first three known $K$-groups.
+
+The next attempt at defining $K$-theory for each natural number was given by Quillen in 1973 in his paper ``Higher Algebraic K-Theory: I'' \cite{quillen1973higher}.
+Quillen defines a topological space, proves that its homotopy groups agree with the known definitions and derives some structural results, which translate algebraic relations
+into topological relations between these newly defined spaces. These are the $K$-groups that are studied in this diploma thesis.
+
+\section{$K$-Theory of Rings}
+I will generally assume rings to be unital but not necessarily commutative rings.
+
+As said before, I will deviate from the historical viewpoint and just define the $K$-theory space in order to give a more linear
+concise summary for $K$-theory of rings. In preparation for that there are some necessary prerequisites in group homology.
+
+\subsection{Classifying Space of a Group}
+The first investigation focuses on a space $|BG|$, which arises in the context of classifying
+principal $G$-bundles for a group $G$. It yields the result that isomorphism classes of $G$-bundles over a space $X$
+are classified by homotopy classes of maps from $X$ to $|BG|$. It is relevant in the context of this thesis however
+because of its homotopy groups (cf. Lemma \ref{classif}), so I will not elaborate on bundles any further.
+For simplicial methods consult Loday's Appendix B in ``Cyclic Homology''\cite{LCy}, the ``basic
+definitions'' in Chapter I of Goerss-Jardine ``Simplicial homotopy theory'' \cite{goerss2009simplicial}
+and May's ``Simplicial Objects in Algebraic Topology''\cite{may1992simplicial}.
+
+\defn{
+For $G$ a group define a simplicial set as follows:
+\begin{itemize}
+ \item The set of $n$-simplices is given as $$BG_n:=G^n = G\times \ldots \times G,$$ i.e. $n$-simplices are $n$-tuples of elements of $G$,
+ \item The face maps $d_i\colon BG_n \rightarrow BG_{n-1}$ are given by the equations
+$$d_i(g_1,\ldots,g_n):=\begin{cases}
+                       (g_2,\ldots,g_n) & \mathrm{~~~for~~} i=0\\
+                       (g_1,\ldots,g_ig_{i+1},\ldots,g_n) & \mathrm{~~~for~~} i = 1,\ldots, n-1\\
+                       (g_1,\ldots,g_{n-1}) & \mathrm{~~~for~~}i = n.
+                       \end{cases}
+$$
+\item The degeneracies $s_i\colon BG_n \rightarrow BG_{n+1}$ are given by the equations
+$$s_i(g_1,\ldots,g_n):=(g_1,\ldots,g_{i-1},1,g_i,\ldots,g_n)  \mathrm{~~~for~~} i=0,\ldots,n $$
+which are putting a $1$ next to each component including the left- and rightmost position.
+\end{itemize}
+
+This constitutes a simplicial set (cf. May's ''Concise Course in Algebraic Topology'' \cite[Chapter 16, Section 5]{may1999concise}). \label{topbarg}
+}
+\prop{\cite[Section 16.5]{may1999concise}\label{classif} (1) Let $G$ be a topological group, then each homotopy group of the realisation of $BG$ is identified as follows
+$$\pi_n(|BG|)\cong \pi_{n-1}(G) ~~(n \geq 1).$$
+(2) If in particular $G$ is discrete, this implies
+$$\pi_n(|BG|)=\begin{cases}
+             G & ~~~\mathrm{for~~} n=1\\ 0 & \mathrm{~~~otherwise.}
+            \end{cases}$$
+\phantom{blubbel}\hfill$\Box$
+}
+
+\rem{
+In particular this proposition answers the question whether each discrete group can be realised as a fundamental group affirmatively.
+}
+
+\subsection{Bar Construction on the Group Ring}
+There is a simplicial abelian group closely related to the simplicial set discussed before.
+
+\defn{\label{AbBar}
+Let $G$ be a discrete group and $\Z\lbrack G\rbrack$ its group ring with integer coefficients.
+Define the following simplicial abelian group:
+\begin{itemize}
+ \item Its group of $n$-simplices consists the free abelian group on $n$-tuples of $G$
+$$B_n(G):=\Z\lbrack G\rbrack ^{\otimes n} \cong \Z\lbrack G^n \rbrack$$
+ \item Its face and degeneracy maps are given by the linear extension of the respective maps given before in definition \ref{topbarg}.
+\end{itemize}
+The chain complex associated to this simplicial abelian group is called the bar complex associated to the group $G$.
+}
+
+\rem{
+The common notations $BG$ for both objects are quite unfavourable, but on the other hand from
+the simplicial perspective legitimate. I will denote the simplicial set with $BG_\bullet$ and
+the simplicial abelian group with $B_*(G)$. The context in which they are used should provide sufficient grounds for just one interpretation to make sense.
+}
+
+The bar complex defines group homology.
+
+\defn{\label{defgrphom}
+Let $G$ be a group, then the group homology of $G$ is defined to be the homology
+of the bar complex $G$, i.e. $$H_n(G):=H_n(B_*(G)).$$
+}
+
+The following result shows how well the two bar constructions interact:
+
+\thm{\cite[Theorem 6.10.5]{weibel1995introduction} \label{alleshomologie}
+For $G$ a group, $BG_\bullet$ the associated simplicial set and $B_*(G)$ its associated bar complex,
+the singular homology with $\Z$-coefficients of $|BG|$ and group homology of $G$, which is homology of $B_*(G)$, are isomorphic, i.e.
+$$H_n(|BG|,\Z) \cong H_n(G) = H_n(B_*(G)).$$
+\phantom{blubbel}\hfill$\Box$
+}
+
+\rem{
+I will use this isomorphism in quite an inexplicit manner, since chains in $B_*(G)$ and the cellular chain complex of $|BG|$
+are isomorphic in a natural way. A very elegant proof via singular chains can be found in Weibel's ``An Introduction to Homological Algebra'' \cite{weibel1995introduction} Theorem 6.10.5.
+}
+
+There is an interpretation of the first homology group as follows:
+
+\prop{\cite[Theorem 6.1.11]{weibel1995introduction} \label{h1}
+For each group $G$, the first homology group of $G$ is naturally identified with the abelianised group
+$$H_1(G) = G_{ab}.$$
+\phantom{blubbel}\hfill$\Box$
+}
+
+\subsection{Plus-Construction on Classifying Spaces}
+Since by lemma \ref{classif} the classifying space of a discrete group only provides one non-trivial homotopy group, the space has to
+be modified in order to get $K_n(R) = \pi_n(KR)$ coinciding with the old definitions of $K_1$ and $K_2$. Furthermore
+it ought to represent arithmetic information about the ring $R$. Therefore it would be quite counterintuitive to expect the $K$-groups in all
+higher degrees to be trivial. Since the first three groups measure the linear algebra over a ring, it seems natural to approach the definition
+of $K$-theory by looking at the classifying space of general linear groups over a ring.
+
+In order to organise the linear groups of a ring into one structure, define the index category $\mathcal{N}$ with objects $\lbrack n \rbrack := \{1,\ldots,n\}$
+and morphisms $f\colon \lbrack n \rbrack \rightarrow \lbrack n+k\rbrack$ given by $f(i) = i$ for each $i\in \lbrack n \rbrack$.
+
+\defn{\label{stableGL}
+For $R$ a unital ring and $F\colon \mathcal{N} \rightarrow Grp$ the functor given on objects by $$F(\lbrack n\rbrack) := GL_n(R)$$
+and on morphisms by $$(F(f\colon \lbrack n \rbrack \rightarrow \lbrack n+1 \rbrack)(A))_{i,j} = \begin{cases}
+                                                                 A_{f^{-1}(i),f^{-1}(j)} & ~~~~ i,j\in f(\lbrack n \rbrack)\\
+								 0 & ~~~~(i \notin f(\lbrack n \rbrack) \vee j \notin f(\lbrack n \rbrack)) \wedge i\neq j\\
+								 1 & ~~~~i=j \wedge i\notin f(\lbrack n \rbrack),
+                                                               \end{cases}$$
+define the stabilised linear group of $R$ as the colimit over $F$
+$$GL(R) := \mathrm{colim}_\mathcal{N} F.$$
+In this case it is evidently even a filtered colimit $GL(R):=\underrightarrow{\lim} GL_n(R)$.
+}
+
+\rem{
+In less formal terms the stabilised linear group allows to identify each invertible matrix as a top left finite submatrix of an infinite
+matrix, which otherwise has unit entries on the diagonal and zeroes everywhere else.
+}
+
+Defining the $K$-theory space of a ring involves studying the subgroup of elementary matrices in $GL(R)$. This was initially motivated by
+Bass via $K_1$ in \cite{bass1964k}. Recall the following definition:
+
+\defn{
+Denote by $e_{i,j}(\lambda)$ the matrix with the following components
+$$(e_{i,j}(\lambda))_{k,l}:=\delta_{k,l}+\lambda\delta_{i,k}\delta_{j,l}~~~~ i\neq j$$
+That is $e_{i,j}(\lambda)$ is defined to be the identity matrix with exactly one off-diagonal component $\lambda\in R$.
+
+The group of $n\times n$-elementary matrices $E_n(R)$ is defined as the subgroup of $GL_n(R)$ generated by $e_{i,j}(\lambda)$ for each $i\neq j$ and each $\lambda\in R$.
+
+Since this is compatible with the stabilisation given in definition \ref{stableGL}, the stabilised group of elementary matrices can be defined in the same
+fashion as in \ref{stableGL} by $$E(R):=\underrightarrow{\lim}E_n(R).$$ It is a subgroup of $GL(R)$ in a natural manner.
+}
+
+The next lemma is essential in constructing the $K$-theory space $K(R)$.
+
+\lemma{\cite[Proposition 1.5]{srinivas1996algebraic} \label{Eperfect}
+The stabilised elementary matrices generate a normal subgroup of the stabilised general linear group for any ring
+$$E(R)\vartriangleleft GL(R),$$
+which is perfect, i.e.
+$$E(R)=\lbrack E(R), E(R)\rbrack.$$
+Furthermore the commutator subgroup $\lbrack GL(R), GL(R) \rbrack$ of the stabilised general linear group is equal to the stabilised subgroup generated by elementary matrices, i.e.
+$$E(R)=\lbrack GL(R), GL(R)\rbrack.$$
+\hfill$\Box$
+}
+
+The following result gives the classical construction of Quillen to define higher $K$-theory:
+
+\thm{\cite[Theorem 2.1]{srinivas1996algebraic} \label{plus}
+Let $X$ be a CW-complex and $N\vartriangleleft \pi_1(X)$ a perfect normal subgroup of the fundamental group of $X$. Then there is a space $X^+$ with a
+map $i\colon X \rightarrow X^+$, which are called the plus-construction on $X$ with respect to $N$. These satisfy the following properties:
+\begin{enumerate}
+ \item The map $i\colon X \rightarrow X^+$ induces the canonical projection on fundamental groups $$i_*\colon \pi_1(X) \rightarrow \pi_1(X^+)=\pi_1(X)/N.$$
+ \item Each map $f\colon X \rightarrow Z$, which is trivial on the given subgroup $N$, that is $$\pi_1(f)\circ (j\colon N \rightarrow \pi_1(X))=0,$$ extends to a map on the plus-construction $\bar f\colon X^+ \rightarrow Z$.
+The extension is unique up to homotopy in making the diagram
+$$\xymatrix{
+X \ar[dr]_{f} \ar[rr]^{i}&&X^+ \ar[dl]^{\bar f}\\
+&Z & \\
+}$$
+commute up to homotopy.
+ \item For each system of local coefficients $\mathcal{L}\colon \Pi_1(X^+) \rightarrow Ab$ on $X^+$ the induced map of the inclusion
+$$i_*\colon H_n(X,i^*\mathcal{L})\rightarrow H_n(X^+,\mathcal{L})$$
+induces an isomorphism on singular homology with local coefficients for each $n\geq 0$.
+\end{enumerate}
+\phantom{blubbel}\hfill$\Box$
+}
+
+\rem{
+Let me emphasise some facts that the proof of this result yields. It is essential that the actual construction can be given by attaching $2$-cells which
+precisely take care of the subgroup $N$ and additional $3$-cells to correct the defect on homology the $2$-cells might have caused. In that manner
+it is legitimate to think of $i\colon X \rightarrow X^+$ as an inclusion.
+
+I will not go into detail about local coefficients, but state that \ref{plus}.(3) implies $H_n(X,G)\cong H_n(X^+,G)$
+for each abelian coefficient group $G$ understood as constant coefficients as well, specifically for $G=\Z$.
+
+Property $(2)$ in particular implies that any two plus-constructions to a fixed perfect normal subgroup are homotopy-equivalent by the usual argument.
+}
+
+The results \ref{Eperfect} and \ref{plus} combine to Quillen's definition of higher $K$-theory.
+
+\defn{
+For $R$ a ring define the $K$-theory space of $R$ to be the plus-construction on the classifying space of $GL(R)$ with respect to the elementary matrices $E(R)$, i.e.
+$$K(R) := |BGL(R)|^+$$
+and for $n\geq 1$ define the $K$ groups of $R$ by
+$$K_n(R):=\pi_n(K(R))~~~ (n\geq 1).$$
+}
+
+\rem{Be aware that I completely avoid $K_0(R)$ here and in all the diploma thesis, because
+it is exceptional in most cases.
+}
+
+As a defining property of the plus construction there are immediate reinterpretations of $K_1$:
+
+\prop{\cite[Theorem 2.1 and Proposition 1.5]{srinivas1996algebraic} There are the following natural identifications\label{k1gl}
+$$K_1(R)=GL(R)/E(R) = GL(R)/\lbrack GL(R), GL(R)\rbrack = GL(R)_{ab} = H_1(GL(R)).$$
+\begin{proof}
+The first equality is the definition of $K(R)$, the second identification is a consequence of lemma \ref{Eperfect}, the third is the usual identification giving
+a natural model for the abelianised group of any group and the last identification is the classical one already cited in proposition \ref{h1}.
+\end{proof}
+}
+
+I will only refer to \cite{srinivas1996algebraic} again to note that there are interpretations for $K_2$ and $K_3$ as well, which are not used in this
+diploma thesis.
+
+The identifications given above in particular yield a useful tool for commutative rings.
+
+\prop{\cite[Theorem 2.2.1]{rosenberg1994algebraic}\label{det}
+For $R$ a commutative ring, the determinant maps for each finite degree $\det_n\colon GL_n(R) \rightarrow R^\times$ stabilise to give a
+map $$\det\colon GL(R) \rightarrow R^\times,$$ which is a group homomorphism with $$\det(e_{i,j}(\lambda))=1_R$$
+for each $i\neq j$ and $\lambda \in R$. In particular it satisfies $E(R)\subset \ker(det\colon GL(R)\rightarrow R^\times)$ and hence factors as follows
+$$
+\xymatrix{
+GL(R)\ar[dr]\ar[rr]^{\det}&& R^\times\\
+&GL(R)/E(R)=K_1(R).\ar[ur]
+}
+$$
+\phantom{blubbel}\hfill $\Box$
+}
+
+It is thus legitimate to write $\det\colon K_1(R)\rightarrow R^\times$ as well and to call it the determinant map as well.
+This is useful because there is an obvious inclusion $j\colon R^\times = GL_1(R) \rightarrow GL(R) \rightarrow GL(R)/E(R)$,
+which yields $\det\circ j = id_{R^\times}$ and hence gives a natural splitting exact sequence
+$$0\rightarrow SK_1(R) \rightarrow K_1(R) \rightarrow R^\times \rightarrow 0,$$
+which in particular implies
+$$K_1(R)\cong SK_1(R)\oplus R^\times$$
+for $SK_1(R) := SL(R)/E(R)$, where $SL(R)$ is the usual special linear group stabilised as $GL(R)$ and $E(R)$ before. For commutative
+rings $R$ the problem of computing $K_1(R)$ thus reduces to computing units --- which may be a very hard problem (cf. Chapter 4) --- and computing the reduction
+of matrices of determinant one by elementary matrices --- which is hard in general as well, but can be feasible.
+
+\rem{\label{HurewiczKH}
+Let me emphasise that there is a natural map $K_i(R) \rightarrow H_i(GL(R))$ given as follows:
+
+The $K$-theory of a ring is defined as $K_i(R):= \pi_i(|BGL(R)|^+) (i\geq 1)$ and the plus-construction does not change homology
+$$H_i(|BGL(R)|^+,\Z)\cong H_i(|BGL(R)|,\Z) = H_i(GL(R)).$$
+Hence the Hurewicz-homomorphism gives a natural map $$K_i(R) = \pi_i(|BGL(R)|^+) \rightarrow H_i(GL(R))$$
+and specifically in degree $1$ this can be understood as the identity on $GL(R)/E(R)$, since there are canonical
+identifications given in proposition \ref{k1gl} $$H_1(GL(R))=GL(R)_{ab}=GL(R)/\lbrack GL(R),GL(R)\rbrack = GL(R)/E(R)=K_1(R).$$}
